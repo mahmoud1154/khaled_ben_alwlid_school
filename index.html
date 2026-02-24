@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" href="icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منصة الفصاحة</title>
+<meta name="description" content="منصة الفصاحة لتعلم اللغة العربية - دروس في النحو والصرف، شرح القواعد، مفردات، قراءة، ومكتبة PDF للطلاب.">
+<meta name="keywords" content="
+تعلم اللغة العربية,
+دروس اللغة العربية,
+قواعد اللغة العربية,
+شرح النحو,
+تعلم النحو بسهولة,
+مفردات اللغة العربية,
+قراءة نصوص عربية,
+كتب قواعد اللغة العربية PDF,
+موسوعات اللغة العربية,
+منصة الفصاحة,
+مدرسة خالد بن الوليد الثانوية,
+اللغة العربية للمبتدئين,
+اللغة العربية للطلاب
+">
+<meta name="author" content="مدرسة خالد بن الوليد الثانوية">
+<meta name="robots" content="index, follow">
+ 
+<link rel="stylesheet" href="style.css">
+  <!-- خط عربي -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+
+<script src="script.js">
+function updateThemeButton(){
+  const btn = document.getElementById("themeBtn");
+  if(!btn) return;
+
+  if(document.body.classList.contains("dark")){
+    btn.textContent = "☀️";
+  }else{
+    btn.textContent = "🌙";
+  }
+}
+
+function applySystemTheme(){
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if(prefersDark){
+    document.body.classList.add("dark");
+  }else{
+    document.body.classList.remove("dark");
+  }
+
+  updateThemeButton();
+}
+
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")){
+    localStorage.setItem("theme","dark");
+  }else{
+    localStorage.setItem("theme","light");
+  }
+
+  updateThemeButton();
+}
+
+/* ===== أولوية الاختيار ===== */
+/* 1️⃣ إذا المستخدم اختار يدوي */
+if(localStorage.getItem("theme")){
+  if(localStorage.getItem("theme")==="dark"){
+    document.body.classList.add("dark");
+  }
+}else{
+  /* 2️⃣ إذا ما اختار → حسب الجهاز */
+  applySystemTheme();
+}
+
+/* تحديث الزر */
+updateThemeButton();
+
+/* إذا الجهاز غير وضعه أثناء التصفح */
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+  if(!localStorage.getItem("theme")){
+    applySystemTheme();
+  }
+});
+</script>
+
+<style>
+      :root{
+      --bg:#f4f6f8;
+      --card:#e8e8e8;
+      --text:#1e293b;
+      --muted:#64748b;
+
+      --primary:#1f6f8b;      /* أزرق تركوازي */
+      --secondary:#2ea3c6;    /* أزرق فاتح */
+      --gold:#f4b400;         /* أصفر ذهبي */
+      --dark:#222222;
+
+      --border:rgba(0,0,0,.08);
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --radius:16px;
+    }
+
+    *{box-sizing:border-box}
+    /* ===== انتقال ناعم بين الوضعين ===== */
+*{
+  transition:
+    background-color .4s ease,
+    color .4s ease,
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  transition: background-color .4s ease, color .4s ease;
+}
+
+body{
+  margin:0;
+  font-family:"Cairo",sans-serif;
+  background:
+    radial-gradient(900px 500px at 10% 0%, rgba(46,163,198,.12), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(244,180,0,.12), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.9;
+}
+
+    /* ✅ الصفحة كاملة (بدون حصر بالوسط) */
+  .container{
+  width:100%;
+  padding:0 22px;
+  } /* بس مسافة جانبية بسيطة */
+
+
+    /* ✅ Header صغير وعادي + خلفية */
+header{
+  padding:20px 0;
+}
+
+.hero{
+  width:100%;
+  min-height:300px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  background:
+    linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.66)),
+    url("img.jpg");
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  padding:50px 20px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  text-align:center;
+  color:#fff;
+}
+
+.hero img {
+  height: 10px;
+}
+
+.hero h1{
+  font-size:70px;
+  margin:0;
+  font-weight:900;
+  font-family: Amiri, serif;
+}
+
+.hero p{
+  font-size:18px;
+  margin-top:12px;
+  opacity:.95;
+}
+
+    /* Navigation */
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      margin:16px 0;
+      flex-wrap:wrap;
+    }
+
+    nav a{
+      text-decoration:none;
+      padding:10px 18px;
+      border-radius:30px;
+      background:var(--card);
+      border:1px solid var(--border);
+      color:var(--text);
+      font-weight:700;
+      transition:.3s;
+    }
+
+    nav a:hover{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    /* Sections */
+    section{
+      background:var(--card);
+      padding:20px;
+      margin:20px 0;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    section h2{
+      margin:0 0 15px;
+      color:var(--gold);
+    }
+
+    /* Lessons */
+    .lesson{
+      background:#f9fafb;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:15px;
+      border:1px solid var(--border);
+    }
+
+    .lesson h3{
+      margin-top:0;
+      color:var(--primary);
+    }
+
+    /* Grammar */
+    .rules{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+      gap:25px;
+    }
+
+    .rule{
+      background:#f9fafb;
+      padding:15px;
+      border-radius:12px;
+      border:1px solid var(--border);
+    }
+
+    .rule h4{
+      margin:0 0 8px;
+      color:var(--gold);
+    }
+
+    .example{
+      background:rgba(31,111,139,.10);
+      padding:10px;
+      border-radius:10px;
+      margin-top:8px;
+    }
+
+    /* Encyclopedias */
+    .ency-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:15px;
+    }
+
+    .ency-card{
+      background:#f9fafb;
+      padding:15px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      color:var(--text);
+      transition:.3s;
+      display:block;
+    }
+
+    .ency-card:hover{
+      background:var(--primary);
+      color:#fff;
+      transform:translateY(-3px);
+    }
+
+    .tag{
+      font-size:12px;
+      background:var(--gold);
+      color:#000;
+      padding:3px 8px;
+      border-radius:20px;
+      display:inline-block;
+      margin-top:6px;
+    }
+
+    /* Library */
+    .library{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:15px;
+    }
+
+    .lib-item{
+      background:#f9fafb;
+      padding:15px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      color:var(--text);
+      transition:.3s;
+      display:block;
+    }
+
+    .lib-item:hover{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    /* Footer */
+    footer{
+      text-align:center;
+      padding:15px;
+      margin-top:30px;
+      background:#1f2937;
+      border-radius:15px;
+      color:#fff;
+    }
+
+    footer img {
+      width: 100px;
+      border-radius: 50%;
+      border: solid 2px white;
+      transition: 0.2s;
+    }
+    
+    footer img:hover{
+     box-shadow: 0 0 10px white ;
+    }
+
+
+    /* ===== زر الوضع الداكن ===== */
+.dark-toggle{
+  position:fixed;
+  top:20px;
+  left:20px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  border:none;
+  background:var(--primary);
+  color:#fff;
+  font-size:20px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+  z-index:9999;
+}
+
+/* ===== ألوان الوضع الداكن ===== */
+body.dark{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --border:rgba(255,255,255,.08);
+}
+
+body.dark section,
+body.dark .lesson,
+body.dark .rule,
+body.dark .lib-item,
+body.dark .ency-card{
+  background:#1e293b;
+  color:#f1f5f9;
+}
+
+body.dark nav a{
+  background:#1e293b;
+  color:#f1f5f9;
+}
+
+body.dark nav a:hover{
+  background:var(--secondary);
+  color:#fff;
+}
+
+body.dark footer{
+  background:#0f172a;
+}
+</style>
+
+<body>
+  <header class="container">
+    <div class="hero">
+      <img src="img.jpg" alt="">
+      <h1>منصة الفصاحة</h1>
+      <p>دروس منظمة — شرح مبسّط للقواعد — مكتبة PDF مفيدة للطلاب</p>
+    </div>
+  </header>
+
+  <button id="themeBtn" class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+
+  <div class="navwrap">
+    <nav class="container">
+      <a href="#lessons">الدروس</a>
+      <a href="#grammar">القواعد</a>
+      <a href="#encyclopedia">الموسوعات</a>
+      <a href="#library">المكتبة</a>
+    </nav>
+  </div>
+
+  <main class="container">
+
+    <section id="lessons">
+      <h2>الدروس التعليمية <span class="badge">4 دروس</span></h2>
+
+      <div class="lesson" id="alphabet">
+        <h3>درس 1: الحروف العربية</h3>
+        <p class="muted">الحروف العربية تتكون من 28 حرفًا، وهي أساس تعلم القراءة والكتابة.</p>
+        <p>ا، ب، ت، ث، ج، ح، خ، د، ذ، ر، ز، س، ش، ص، ض، ط، ظ، ع، غ، ف، ق، ك، ل، م، ن، هـ، و، ي</p>
+        <p>نصيحة: تدرب على <b>مخارج الحروف</b> وميّز بين الحروف المتشابهة مثل (س/ص) و(ذ/ز).</p>
+      </div>
+
+      <div class="lesson" id="vocabulary">
+        <h3>درس 2: المفردات</h3>
+        <p>تعلم الكلمات الأساسية يساعدك على تكوين جمل بسرعة:</p>
+        <ul>
+          <li><b>مرحبًا</b> = تحية</li>
+          <li><b>كتاب</b> = شيء للقراءة</li>
+          <li><b>مدرسة</b> = مكان للتعليم</li>
+          <li><b>قلم</b> = أداة للكتابة</li>
+        </ul>
+        <p class="muted">جرّب حفظ 5 كلمات يوميًا واكتب جملة قصيرة بكل كلمة.</p>
+      </div>
+
+      <div class="lesson" id="reading">
+        <h3>درس 3: القراءة</h3>
+        <p>ابدأ بنصوص قصيرة ثم زد الصعوبة تدريجيًا:</p>
+        <p class="example"><b>نص:</b> الولد يذهب إلى المدرسة كل يوم. يحب القراءة والكتابة.</p>
+        <p class="muted">اقرأ بصوت عالٍ وحدد الكلمات الجديدة ثم ابحث عن معناها.</p>
+      </div>
+
+      <div class="lesson" id="grammar-intro">
+        <h3>درس 4: مدخل إلى القواعد</h3>
+        <p>القواعد تساعدك على كتابة جمل صحيحة وفهم النصوص بشكل أعمق. في القسم التالي ستجد القواعد الأساسية مشروحة مع أمثلة.</p>
+      </div>
+    </section>
+
+    <section id="grammar">
+      <h2>القواعد الأساسية <span class="badge">شرح + أمثلة</span></h2>
+      <p class="muted">هذه أهم القواعد الأساسية بشكل مبسّط، وكل قاعدة معها تعريف سريع ومثال واضح.</p>
+
+      <div class="rules">
+        <div class="rule">
+          <div class="rule-title">
+            <h4>1) الاسم والفعل والحرف</h4>
+            <span class="pill">تقسيم الكلام</span>
+          </div>
+          <p>
+            <b>الاسم:</b> يدل على شخص/شيء/مكان مثل: طالب، كتاب، مدرسة.<br>
+            <b>الفعل:</b> يدل على حدث مرتبط بزمن مثل: كتبَ، يكتبُ، اكتبْ.<br>
+            <b>الحرف:</b> لا يظهر معناه كاملًا إلا مع غيره مثل: في، إلى، من، على.
+          </p>
+          <div class="example">
+            <b>مثال:</b> ذهبَ <u>الطالبُ</u> <u>إلى</u> المدرسةِ. (ذهبَ فعل، الطالبُ اسم، إلى حرف)
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">
+            <h4>2) الإعراب: مرفوع، منصوب، مجرور</h4>
+            <span class="pill">حركات آخر الكلمة</span>
+          </div>
+          <p>
+            <b>المرفوع:</b> غالبًا يكون الفاعل أو المبتدأ والخبر، وعلامته الضمة (ـُ).<br>
+            <b>المنصوب:</b> غالبًا يكون المفعول به أو خبر كان، وعلامته الفتحة (ـَ).<br>
+            <b>المجرور:</b> يأتي بعد حرف الجر، وعلامته الكسرة (ـِ).
+          </p>
+          <div class="example">
+            <b>أمثلة:</b><br>
+            الطالبُ مجتهدٌ (مرفوع).<br>
+            قرأَ الطالبُ كتابًا (كتابًا منصوب).<br>
+            ذهبتُ إلى المدرسةِ (المدرسةِ مجرور).
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">
+            <h4>3) الجملة الاسمية والجملة الفعلية</h4>
+            <span class="pill">تركيب الجملة</span>
+          </div>
+          <p>
+            <b>الجملة الاسمية:</b> تبدأ باسم، وتتكون غالبًا من <b>مبتدأ + خبر</b>.<br>
+            <b>الجملة الفعلية:</b> تبدأ بفعل، وتتكون غالبًا من <b>فعل + فاعل</b> (وقد يأتي مفعول به).
+          </p>
+          <div class="example">
+            <b>أمثلة:</b><br>
+            <b>اسمية:</b> الجوُّ جميلٌ. (الجوُّ مبتدأ، جميلٌ خبر)<br>
+            <b>فعلية:</b> كتبَ الطالبُ الدرسَ. (كتبَ فعل، الطالبُ فاعل، الدرسَ مفعول به)
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">
+            <h4>4) التذكير والتأنيث</h4>
+            <span class="pill">مذكر/مؤنث</span>
+          </div>
+          <p>
+            <b>المذكر:</b> مثل: ولد، طالب، كتاب.<br>
+            <b>المؤنث:</b> مثل: بنت، طالبة، مدرسة (وغالبًا ينتهي بـ ة/اء).<br>
+            يجب أن يتطابق <b>الصفة</b> مع الموصوف في التذكير والتأنيث.
+          </p>
+          <div class="example">
+            <b>أمثلة:</b><br>
+            ولدٌ <u>ذكيٌّ</u> <br>
+            بنتٌ <u>ذكيّةٌ</u> <br>
+            (لا نقول: بنتٌ ذكيٌّ )
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">
+            <h4>5) أدوات التعريف والتنكير</h4>
+            <span class="pill">الـ / بدون الـ</span>
+          </div>
+          <p>
+            <b>المعرّف بـ(ال):</b> مثل: <b>الكتاب</b>، <b>المدرسة</b> (شيء محدد ومعروف).<br>
+            <b>النكرة:</b> مثل: <b>كتابٌ</b>، <b>مدرسةٌ</b> (شيء غير محدد).
+          </p>
+          <div class="example">
+            <b>مثال:</b> قرأتُ <u>كتابًا</u> (أي كتاب) — ثم: أعجبني <u>الكتابُ</u> (كتاب محدد).
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">
+            <h4>6) حروف الجر ومعناها</h4>
+            <span class="pill">في / على / إلى ...</span>
+          </div>
+          <p>
+            حروف الجر تدخل على الاسم وتجعله <b>مجرورًا</b>.<br>
+            من أشهرها: <b>في</b> (داخل)، <b>على</b> (فوق)، <b>إلى</b> (اتجاه)، <b>من</b> (ابتداء).
+          </p>
+          <div class="example">
+            <b>أمثلة:</b> في البيتِ — على الطاولةِ — إلى المدرسةِ — من البيتِ
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="encyclopedia">
+      <h2>الموسوعات <span class="badge">مصادر لتعلّم العربية</span></h2>
+      <p class="muted">اختر مصدر مناسب: معاجم لمعاني الكلمات، منصات تعليم، ومكتبات كتب عربية.</p>
+
+      <div class="ency-grid">
+        <a class="ency-card" href="https://www.almaany.com/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>معجم المعاني</h3><span class="tag">معجم</span></div>
+          <p class="ency-desc">ابحث عن معنى الكلمة، المرادفات والأضداد، والاشتقاقات بسرعة.</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+
+        <a class="ency-card" href="https://www.baheth.info/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>الباحث العربي</h3><span class="tag">معاجم ونصوص</span></div>
+          <p class="ency-desc">محرك بحث للمعاجم العربية والنصوص، مفيد للطلاب والباحثين.</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+
+        <a class="ency-card" href="https://dorar.net/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>الدرر السنية</h3><span class="tag">موسوعة</span></div>
+          <p class="ency-desc">موسوعات نصية ومعاجم ومحتوى موثق، تساعد في الفهم والقراءة.</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+
+        <a class="ency-card" href="https://shamela.ws/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>المكتبة الشاملة</h3><span class="tag">كتب</span></div>
+          <p class="ency-desc">كتب النحو والصرف والبلاغة (مثل الآجرومية والألفية وشروحها).</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+
+        <a class="ency-card" href="https://www.almeshkat.net/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>مكتبة المشكاة</h3><span class="tag">مكتبة</span></div>
+          <p class="ency-desc">مكتبة عربية فيها كتب متعددة، مفيدة للقراءة والاطلاع.</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+
+        <a class="ency-card" href="https://archive.org/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>Internet Archive</h3><span class="tag">PDF</span></div>
+          <p class="ency-desc">ابحث عن كتب عربية PDF في النحو والقراءة والبلاغة.</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+
+        <a class="ency-card" href="https://learning.aljazeera.net/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>تعلم العربية (الجزيرة)</h3><span class="tag">تعلم</span></div>
+          <p class="ency-desc">مواد تعليمية وتمارين منظمة لتطوير مهارات العربية.</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+
+        <a class="ency-card" href="https://www.arabacademy.com/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>Arab Academy</h3><span class="tag">دورات</span></div>
+          <p class="ency-desc">دروس تفاعلية لتعلم العربية (مستويات + نطق + تمارين).</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+
+        <a class="ency-card" href="https://www.madinaharabic.com/" target="_blank" rel="noopener">
+          <div class="ency-top"><h3>Madinah Arabic</h3><span class="tag">قواعد</span></div>
+          <p class="ency-desc">قواعد ومفردات وتمارين مناسبة للمبتدئين والمتوسطين.</p>
+          <div class="ency-action"><span>زيارة المصدر</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section id="library">
+      <h2>المكتبة <span class="badge">PDF</span></h2>
+
+      <div class="library">
+        <a class="lib-item" href="Noor-Book.com  قواعد اللغة العربية 3 .pdf" target="_blank" rel="noopener">
+          <p class="t">كتاب قواعد اللغة العربية</p>
+          <p class="d">ملف يساعدك في فهم الأساسيات مع أمثلة وتمارين.</p>
+        </a>
+
+        <a class="lib-item" href="Noor-Book.com  معجم مفردات المشترك السامي في اللغة العربية.pdf" target="_blank" rel="noopener">
+          <p class="t">كتاب المفردات العربية</p>
+          <p class="d">قائمة كلمات مهمة مصنّفة حسب الموضوع.</p>
+        </a>
+
+        <a class="lib-item" href="nsooos.pdf" target="_blank" rel="noopener">
+          <p class="t">كتاب القراءة والنصوص</p>
+          <p class="d">نصوص قصيرة للتدرب على القراءة والفهم.</p>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <img src="logo.png" alt="logo">
+      <p>&copy; 2026 مدرسة خالد بن الوليد الثانوية للبين - لواء الموقر - جميع الحقوق محفوظة.</p>
+    </footer>
+
+  </main>
+
+
+</body>
+</html>
