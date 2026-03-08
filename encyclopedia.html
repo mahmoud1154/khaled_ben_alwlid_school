@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موسوعات اللغة العربية</title>
+  <link rel="icon" href="icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f4f6f8;
+      --card:#e8e8e8;
+      --text:#1e293b;
+      --muted:#64748b;
+      --primary:#1f6f8b;
+      --secondary:#2ea3c6;
+      --gold:#f4b400;
+      --border:rgba(0,0,0,.08);
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --radius:16px;
+    }
+
+    *{
+      box-sizing:border-box;
+      transition:background-color .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease,transform .25s ease;
+    }
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:"Cairo",sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(46,163,198,.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(244,180,0,.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.9;
+    }
+
+    .container{
+      width:100%;
+      padding:0 22px;
+    }
+
+    header{
+      padding:20px 0;
+    }
+
+    .hero{
+      width:100%;
+      min-height:240px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:#fff;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:40px 20px;
+      background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.68)),
+        url("img.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+
+    .hero h1{
+      margin:0;
+      font-size:52px;
+      font-weight:800;
+    }
+
+    .hero p{
+      margin-top:10px;
+      font-size:18px;
+      opacity:.95;
+      max-width:760px;
+    }
+
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      margin:16px 0;
+      flex-wrap:wrap;
+    }
+
+    nav a{
+      text-decoration:none;
+      padding:10px 18px;
+      border-radius:30px;
+      background:var(--card);
+      border:1px solid var(--border);
+      color:var(--text);
+      font-weight:700;
+    }
+
+    nav a:hover{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .search-box{
+      margin:18px auto 10px;
+      max-width:700px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:10px 14px;
+      box-shadow:var(--shadow);
+    }
+
+    .search-box span{
+      font-size:20px;
+    }
+
+    .search-box input{
+      width:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      font-family:"Cairo",sans-serif;
+      font-size:16px;
+      color:var(--text);
+    }
+
+    .search-box input::placeholder{
+      color:var(--muted);
+    }
+
+    .no-results{
+      display:none;
+      text-align:center;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      margin:20px 0;
+      box-shadow:var(--shadow);
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    section{
+      background:var(--card);
+      padding:22px;
+      margin:20px 0;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    h2{
+      margin:0 0 12px;
+      color:var(--gold);
+      font-size:30px;
+    }
+
+    .muted{
+      color:var(--muted);
+      margin-top:0;
+    }
+
+    .badge{
+      display:inline-block;
+      background:rgba(244,180,0,.18);
+      color:#8a6300;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:13px;
+      margin-right:8px;
+    }
+
+    .ency-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:18px;
+    }
+
+    .ency-card{
+      background:#f9fafb;
+      padding:18px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:220px;
+    }
+
+    .ency-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 16px 30px rgba(31,111,139,.12);
+    }
+
+    .ency-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    .ency-card h3{
+      margin:0;
+      color:var(--primary);
+      font-size:20px;
+    }
+
+    .tag{
+      font-size:12px;
+      background:var(--gold);
+      color:#000;
+      padding:4px 9px;
+      border-radius:30px;
+      white-space:nowrap;
+      font-weight:700;
+    }
+
+    .ency-card p{
+      margin:0;
+      font-size:15px;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:auto;
+      text-decoration:none;
+      padding:9px 14px;
+      border-radius:30px;
+      font-weight:700;
+      font-size:14px;
+      background:var(--primary);
+      color:#fff;
+      width:fit-content;
+    }
+
+    .btn:hover{
+      background:var(--secondary);
+    }
+
+    footer{
+      text-align:center;
+      padding:18px;
+      margin:25px 0;
+      background:#1f2937;
+      border-radius:15px;
+      color:#fff;
+    }
+
+    footer img {
+      width: 100px;
+      border-radius: 50%;
+      border: solid 2px white;
+      transition: 0.2s;
+    }
+    
+    footer img:hover{
+     box-shadow: 0 0 10px white ;
+    }
+    
+    .dark-toggle{
+      position:fixed;
+      top:20px;
+      left:20px;
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      border:none;
+      background:var(--primary);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 5px 15px rgba(0,0,0,.2);
+      z-index:9999;
+    }
+
+    body.dark{
+      --bg:#0f172a;
+      --card:#1e293b;
+      --text:#f1f5f9;
+      --muted:#94a3b8;
+      --border:rgba(255,255,255,.08);
+    }
+
+    body.dark .ency-card{
+      background:#0f172a;
+    }
+
+    body.dark nav a{
+      background:#1e293b;
+      color:#f1f5f9;
+    }
+
+    body.dark nav a:hover{
+      background:var(--secondary);
+      color:#fff;
+    }
+
+    body.dark footer{
+      background:#0f172a;
+    }
+
+    @media (max-width:700px){
+      .hero h1{font-size:36px}
+      .hero p{font-size:16px}
+      h2{font-size:24px}
+      .search-box{
+        border-radius:20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="themeBtn" class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+
+  <header class="container">
+    <div class="hero">
+      <h1>موسوعات اللغة العربية</h1>
+      <p>موسوعات ومعاجم ومنصات تعليم ومواقع مرجعية تساعد في تعلم العربية وفهمها بعمق</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="#dictionaries">المعاجم</a>
+      <a href="#learning">التعلم</a>
+      <a href="#references">المراجع والموسوعات</a>
+      <a href="books.html">الكتب</a>
+    </nav>
+
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="ابحث عن معجم او منصة او موسوعة" onkeyup="searchCards()">
+    </div>
+  </div>
+
+  <main class="container">
+
+    <div id="noResults" class="no-results">لا توجد نتائج مطابقة للبحث.</div>
+
+    <section id="dictionaries">
+      <h2>المعاجم العربية <span class="badge">بحث سريع</span></h2>
+      <p class="muted">أفضل الصفحات للبحث عن معاني الكلمات والمرادفات والاستعمالات</p>
+
+      <div class="ency-grid">
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>معجم المعاني</h3>
+            <span class="tag">معجم</span>
+          </div>
+          <p>من اشهر مواقع البحث عن معاني الكلمات العربية والمرادفات والاضداد.</p>
+          <a class="btn" href="https://www.almaany.com/" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>الباحث العربي</h3>
+            <span class="tag">معاجم</span>
+          </div>
+          <p>مفيد جدا للوصول الى معاجم عربية متعددة من مكان واحد.</p>
+          <a class="btn" href="https://www.baheth.info/" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>لسان العرب عبر الباحث</h3>
+            <span class="tag">تراث</span>
+          </div>
+          <p>مدخل جيد للرجوع الى معجم لسان العرب والبحث في مواده.</p>
+          <a class="btn" href="https://www.baheth.info/" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>القاموس المحيط عبر الباحث</h3>
+            <span class="tag">معجم</span>
+          </div>
+          <p>مرجع مهم لمعاني الالفاظ وجذورها العربية.</p>
+          <a class="btn" href="https://www.baheth.info/" target="_blank">زيارة الموقع</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="learning">
+      <h2>منصات تعلم العربية <span class="badge">دروس وتمارين</span></h2>
+      <p class="muted">صفحات تفيد الطلاب والمبتدئين ومن يريد تطوير المهارات اللغوية</p>
+
+      <div class="ency-grid">
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>تعلم العربية - الجزيرة</h3>
+            <span class="tag">تعلم</span>
+          </div>
+          <p>دروس وتمارين ومحتوى تفاعلي مجاني لتعلم العربية بشكل منظم.</p>
+          <a class="btn" href="https://learning.aljazeera.net/en" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>Madinah Arabic</h3>
+            <span class="tag">قواعد</span>
+          </div>
+          <p>موقع مفيد في القواعد والمفردات والتمارين التعليمية.</p>
+          <a class="btn" href="https://www.madinaharabic.com/" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>Arab Academy</h3>
+            <span class="tag">دورات</span>
+          </div>
+          <p>منصة تقدم تعلم العربية بمستويات متنوعة.</p>
+          <a class="btn" href="https://www.arabacademy.com/" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>موضوع - اللغة العربية</h3>
+            <span class="tag">مقالات</span>
+          </div>
+          <p>مقالات مبسطة عن خصائص اللغة العربية واهميتها ومجالاتها.</p>
+          <a class="btn" href="https://mawdoo3.com/" target="_blank">زيارة الموقع</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="references">
+      <h2>المراجع والموسوعات <span class="badge">مصادر كثيرة</span></h2>
+      <p class="muted">هذه صفحات موسوعية ومكتبات كبيرة مرتبطة باللغة العربية وكتبها وتراثها</p>
+
+      <div class="ency-grid">
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>المكتبة الشاملة</h3>
+            <span class="tag">مكتبة</span>
+          </div>
+          <p>مكتبة ضخمة تضم كتبا كثيرة وفيها قسم خاص بكتب اللغة.</p>
+          <a class="btn" href="https://shamela.ws/" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>هنداوي</h3>
+            <span class="tag">كتب مجانية</span>
+          </div>
+          <p>مؤسسة توفر كتبا كثيرة بالعربية ويمكن الاستفادة منها في الادب واللغة والتاريخ.</p>
+          <a class="btn" href="https://www.hindawi.org/books/" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>المعرفة</h3>
+            <span class="tag">موسوعة</span>
+          </div>
+          <p>موسوعة عربية مفتوحة تضم مقالات كثيرة عن اللغة العربية وعلومها.</p>
+          <a class="btn" href="https://www.marefa.org/" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>الموسوعة العربية</h3>
+            <span class="tag">مرجع</span>
+          </div>
+          <p>مرجع موسوعي عربي شامل ويمكن الرجوع اليه في الموضوعات اللغوية والعامة.</p>
+          <a class="btn" href="https://www.marefa.org/الموسوعة_العربية" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>الموسوعة العربية العالمية</h3>
+            <span class="tag">موسوعة</span>
+          </div>
+          <p>موسوعة تعليمية وثقافية عربية واسعة.</p>
+          <a class="btn" href="https://www.marefa.org/الموسوعة_العربية_العالمية" target="_blank">زيارة الموقع</a>
+        </div>
+
+        <div class="ency-card">
+          <div class="ency-top">
+            <h3>Internet Archive</h3>
+            <span class="tag">PDF</span>
+          </div>
+          <p>مكتبة رقمية كبيرة يمكن الاستفادة منها للوصول الى كتب عربية وملفات PDF.</p>
+          <a class="btn" href="https://archive.org/" target="_blank">زيارة الموقع</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+<footer>
+    <img src="logo.png" alt="logo">
+    <p>&copy; 2026 مدرسة خالد بن الوليد الثانوية للبين - لواء الموقر - جميع الحقوق محفوظة.</p>
+</footer>
+
+<script>
+function updateThemeButton(){
+  const btn = document.getElementById("themeBtn");
+  if(!btn) return;
+  btn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+}
+
+function applySystemTheme(){
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if(prefersDark){
+    document.body.classList.add("dark");
+  }else{
+    document.body.classList.remove("dark");
+  }
+  updateThemeButton();
+}
+
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
+  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+  updateThemeButton();
+}
+
+function searchCards(){
+  const input = document.getElementById("searchInput");
+  const filter = input.value.trim().toLowerCase();
+  const sections = document.querySelectorAll("main section");
+  const cards = document.querySelectorAll(".ency-card");
+  const noResults = document.getElementById("noResults");
+  let visibleCardsCount = 0;
+
+  cards.forEach(card => {
+    const title = card.querySelector("h3") ? card.querySelector("h3").textContent.toLowerCase() : "";
+    const tag = card.querySelector(".tag") ? card.querySelector(".tag").textContent.toLowerCase() : "";
+    const text = card.querySelector("p") ? card.querySelector("p").textContent.toLowerCase() : "";
+    const fullText = title + " " + tag + " " + text;
+
+    if(fullText.includes(filter)){
+      card.style.display = "flex";
+      visibleCardsCount++;
+    }else{
+      card.style.display = "none";
+    }
+  });
+
+  sections.forEach(section => {
+    const visibleCardsInSection = section.querySelectorAll(".ency-card[style*='display: flex'], .ency-card:not([style]), .ency-card[style='']").length;
+    if(filter === ""){
+      section.style.display = "block";
+    }else{
+      section.style.display = visibleCardsInSection > 0 ? "block" : "none";
+    }
+  });
+
+  if(filter !== "" && visibleCardsCount === 0){
+    noResults.style.display = "block";
+  }else{
+    noResults.style.display = "none";
+  }
+}
+
+if(localStorage.getItem("theme")){
+  if(localStorage.getItem("theme")==="dark"){
+    document.body.classList.add("dark");
+  }
+}else{
+  applySystemTheme();
+}
+
+updateThemeButton();
+
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+  if(!localStorage.getItem("theme")){
+    applySystemTheme();
+  }
+});
+</script>
+
+</body>
+</html>

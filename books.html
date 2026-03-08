@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كتب اللغة العربية</title>
+
+<link rel="icon" href="icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#f4f6f8;
+--card:#ffffff;
+--text:#1e293b;
+--primary:#1f6f8b;
+--secondary:#2ea3c6;
+--gold:#f4b400;
+--muted:#64748b;
+--border:rgba(0,0,0,.06);
+--shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+*{
+box-sizing:border-box;
+transition:.3s;
+}
+
+body{
+margin:0;
+font-family:"Cairo",sans-serif;
+background:
+radial-gradient(900px 500px at 10% 0%, rgba(46,163,198,.12), transparent 60%),
+radial-gradient(900px 500px at 90% 10%, rgba(244,180,0,.12), transparent 60%),
+var(--bg);
+color:var(--text);
+padding:40px;
+}
+
+.hero{
+background:
+linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.68)),
+url("img.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+border-radius:20px;
+padding:60px 20px;
+text-align:center;
+color:#fff;
+box-shadow:var(--shadow);
+margin-bottom:30px;
+}
+
+.hero h1{
+margin:0;
+font-size:52px;
+font-weight:800;
+}
+
+.hero p{
+margin-top:10px;
+font-size:18px;
+opacity:.95;
+}
+
+nav{
+display:flex;
+justify-content:center;
+gap:15px;
+margin:16px 0 30px;
+flex-wrap:wrap;
+}
+
+nav a{
+text-decoration:none;
+padding:10px 18px;
+border-radius:30px;
+background:rgba(255,255,255,.75);
+border:1px solid var(--border);
+color:var(--text);
+font-weight:700;
+backdrop-filter:blur(8px);
+}
+
+nav a:hover{
+background:var(--primary);
+color:#fff;
+}
+
+section{
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(10px);
+padding:25px;
+margin:20px 0;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.35);
+box-shadow:var(--shadow);
+}
+
+h2{
+text-align:center;
+color:var(--gold);
+margin:0 0 10px;
+font-size:34px;
+}
+
+.section-text{
+text-align:center;
+color:var(--muted);
+margin-bottom:25px;
+}
+
+.search-box{
+margin-bottom:25px;
+}
+
+.search-box input{
+width:100%;
+padding:14px 16px;
+border-radius:14px;
+border:1px solid var(--border);
+font-family:"Cairo",sans-serif;
+font-size:15px;
+outline:none;
+background:#fff;
+}
+
+.books-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.book{
+background:var(--card);
+padding:20px;
+border-radius:16px;
+box-shadow:var(--shadow);
+border:1px solid var(--border);
+display:flex;
+flex-direction:column;
+}
+
+.book:hover{
+transform:translateY(-5px);
+background:var(--primary);
+color:white;
+}
+
+.book h3{
+margin-top:0;
+margin-bottom:10px;
+font-size:22px;
+}
+
+.book p{
+margin:0 0 15px;
+font-size:15px;
+line-height:1.8;
+}
+
+.book .buttons{
+display:flex;
+gap:10px;
+margin-top:auto;
+flex-wrap:wrap;
+}
+
+.book a{
+display:inline-block;
+text-decoration:none;
+padding:8px 15px;
+border-radius:20px;
+font-size:14px;
+font-weight:700;
+}
+
+.book .open-btn{
+background:var(--secondary);
+color:white;
+}
+
+.book .download-btn{
+background:var(--gold);
+color:black;
+}
+
+.book .open-btn:hover,
+.book .download-btn:hover{
+transform:scale(1.05);
+}
+
+.note{
+margin-top:25px;
+padding:15px;
+border-radius:14px;
+background:rgba(31,111,139,.10);
+color:var(--text);
+border-right:4px solid var(--primary);
+}
+
+.dark-toggle{
+position:fixed;
+top:20px;
+left:20px;
+width:45px;
+height:45px;
+border-radius:50%;
+border:none;
+background:var(--primary);
+color:#fff;
+font-size:20px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+z-index:9999;
+}
+
+body.dark{
+--bg:#0f172a;
+--card:#1e293b;
+--text:#f1f5f9;
+--muted:#94a3b8;
+--border:rgba(255,255,255,.08);
+--shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+body.dark section{
+background:rgba(30,41,59,.82);
+border:1px solid rgba(255,255,255,.06);
+}
+
+body.dark .search-box input{
+background:#0f172a;
+color:#fff;
+border-color:rgba(255,255,255,.08);
+}
+
+body.dark .book{
+background:#0f172a;
+color:#f1f5f9;
+}
+
+body.dark nav a{
+background:#1e293b;
+color:#f1f5f9;
+}
+
+body.dark nav a:hover{
+background:var(--secondary);
+color:#fff;
+}
+
+body.dark .note{
+background:rgba(46,163,198,.12);
+color:#f1f5f9;
+}
+
+@media (max-width:700px){
+body{
+padding:20px;
+}
+.hero h1{
+font-size:36px;
+}
+.hero p{
+font-size:16px;
+}
+h2{
+font-size:28px;
+}
+}
+
+footer{
+    text-align:center;
+    padding:18px;
+    margin:25px 0;
+    background:#1f2937;
+    border-radius:15px;
+    color:#fff;
+    }
+
+footer img {
+    width: 100px;
+    border-radius: 50%;
+    border: solid 2px white;
+    transition: 0.2s;
+}
+    
+footer img:hover{
+    box-shadow: 0 0 10px white ;
+}
+</style>
+</head>
+
+<body>
+
+<button id="themeBtn" class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+
+<header class="hero">
+<h1>مكتبة اللغة العربية</h1>
+<p>كتب اللغة العربية بصيغة PDF يمكن للزائر فتحها او تحميلها مباشرة</p>
+</header>
+
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="encyclopedia.html">الموسوعات</a>
+</nav>
+
+<section>
+<h2>مكتبة الكتب</h2>
+<p class="section-text">جميع الكتب داخل هذه الصفحة بصيغة PDF ويمكن للزائر قراءة اي كتاب او تحميله بشكل مباشر.</p>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="ابحث عن كتاب داخل المكتبة">
+</div>
+
+<div class="books-grid" id="booksGrid">
+
+<div class="book" data-title="النحو الواضح">
+<h3>النحو الواضح</h3>
+<p>كتاب سهل ومناسب للطلاب في شرح قواعد النحو العربي باسلوب واضح وبسيط.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/النحو-الواضح.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/النحو-الواضح.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="البلاغة الواضحة">
+<h3>البلاغة الواضحة</h3>
+<p>كتاب مهم في علوم البلاغة والبيان والبديع مناسب للمراجعة والتعلم.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/البلاغة-الواضحة.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/البلاغة-الواضحة.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="الاجرومية">
+<h3>الاجرومية</h3>
+<p>متن مختصر ومشهور في النحو العربي ويعد من الكتب المناسبة للبداية.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/الاجرومية.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/الاجرومية.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="الفية ابن مالك">
+<h3>الفية ابن مالك</h3>
+<p>من اشهر كتب النحو والصرف في التراث العربي ويعد مرجعا مهما للدارسين.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/الفية-ابن-مالك.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/الفية-ابن-مالك.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="قطر الندى وبل الصدى">
+<h3>قطر الندى وبل الصدى</h3>
+<p>كتاب مهم للتدرج في دراسة النحو بعد المتون المختصرة.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/قطر-الندى.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/قطر-الندى.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="شذور الذهب">
+<h3>شذور الذهب</h3>
+<p>مرجع معروف في قواعد اللغة العربية واساليبها.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/شذور-الذهب.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/شذور-الذهب.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="لسان العرب">
+<h3>لسان العرب</h3>
+<p>من اكبر معاجم اللغة العربية واشهرها ويفيد في البحث عن المعاني والالفاظ.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/لسان-العرب.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/لسان-العرب.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="قواعد اللغة العربية">
+<h3>قواعد اللغة العربية</h3>
+<p>مرجع مناسب لمراجعة القواعد الاساسية والمتوسطة بطريقة مرتبة.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/قواعد-اللغة-العربية.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/قواعد-اللغة-العربية.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="ديوان المتنبي">
+<h3>ديوان المتنبي</h3>
+<p>من اشهر دواوين الشعر العربي ويضم قصائد قوية في الحكمة والفخر والمدح.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/ديوان-المتنبي.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/ديوان-المتنبي.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="ديوان محمود درويش">
+<h3>ديوان محمود درويش</h3>
+<p>مجموعة شعرية حديثة تعكس جمال التعبير وقوة الصورة الشعرية في الادب العربي المعاصر.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/ديوان-محمود-درويش.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/ديوان-محمود-درويش.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="العقد الفريد">
+<h3>العقد الفريد</h3>
+<p>كتاب ادبي تراثي يجمع بين اللغة والادب والاخبار والنوادر والبلاغة.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/العقد-الفريد.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/العقد-الفريد.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="الكامل في اللغة والادب">
+<h3>الكامل في اللغة والادب</h3>
+<p>من الكتب المشهورة في الادب العربي ويضم نصوصا وشواهد لغوية وبلاغية متنوعة.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/الكامل-في-اللغة-والادب.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/الكامل-في-اللغة-والادب.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="البيان والتبيين">
+<h3>البيان والتبيين</h3>
+<p>كتاب مهم للجاحظ في البلاغة والبيان واللغة والخطابة والادب.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/البيان-والتبيين.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/البيان-والتبيين.pdf" download>تحميل</a>
+</div>
+</div>
+
+
+<div class="book" data-title="المعلقات السبع">
+<h3>المعلقات السبع</h3>
+<p>قصائد من اشهر ما قيل في الشعر العربي القديم وتفيد في دراسة اللغة والصور والمعاني.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/المعلقات-السبع.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/المعلقات-السبع.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="ميزان الذهب في صناعة شعر العرب">
+<h3>ميزان الذهب في صناعة شعر العرب</h3>
+<p>كتاب معروف في علم العروض يشرح اوزان الشعر العربي بطريقة تعليمية مفيدة.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/ميزان-الذهب-في-صناعة-شعر-العرب.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/ميزان-الذهب-في-صناعة-شعر-العرب.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="العروض الواضح">
+<h3>العروض الواضح</h3>
+<p>كتاب مبسط في علم العروض والقافية مناسب للمبتدئين في دراسة الشعر.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/العروض-الواضح.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/العروض-الواضح.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="الصرف الواضح">
+<h3>الصرف الواضح</h3>
+<p>كتاب مناسب لفهم ابنية الكلمات والاشتقاق والتحويلات الصرفية بشكل واضح.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/الصرف-الواضح.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/الصرف-الواضح.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="فقه اللغة وسر العربية">
+<h3>فقه اللغة وسر العربية</h3>
+<p>كتاب مشهور في خصائص العربية والفروق اللغوية ودلالات الالفاظ.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/فقه-اللغة-وسر-العربية.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/فقه-اللغة-وسر-العربية.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="الخصائص">
+<h3>الخصائص</h3>
+<p>من اهم كتب ابن جني في فقه اللغة واصول العربية وخصائصها.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/الخصائص.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/الخصائص.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="الامالي">
+<h3>الامالي</h3>
+<p>كتاب لغوي ادبي يضم فوائد نحوية وبلاغية وشواهد من الشعر والنثر.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/الامالي.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/الامالي.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="جمهرة اشعار العرب">
+<h3>جمهرة اشعار العرب</h3>
+<p>مجموعة شعرية تراثية مهمة تضم نماذج من اجمل الشعر العربي القديم.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/جمهرة-اشعار-العرب.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/جمهرة-اشعار-العرب.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="الادب الجاهلي">
+<h3>الادب الجاهلي</h3>
+<p>كتاب مفيد للتعرف على الشعر الجاهلي وخصائصه ولغته وموضوعاته.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/الادب-الجاهلي.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/الادب-الجاهلي.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="تاريخ الادب العربي">
+<h3>تاريخ الادب العربي</h3>
+<p>مرجع شامل يتناول تطور الادب العربي عبر العصور المختلفة.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/تاريخ-الادب-العربي.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/تاريخ-الادب-العربي.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="النقد الادبي الحديث">
+<h3>النقد الادبي الحديث</h3>
+<p>كتاب يساعد في فهم مناهج النقد الادبي وتطورها في العصر الحديث.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/النقد-الادبي-الحديث.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/النقد-الادبي-الحديث.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="في الادب الجاهلي">
+<h3>في الادب الجاهلي</h3>
+<p>كتاب معروف يناقش الادب الجاهلي من منظور فكري ونقدي.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/في-الادب-الجاهلي.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/في-الادب-الجاهلي.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="صبح الاعشى">
+<h3>صبح الاعشى</h3>
+<p>كتاب تراثي واسع الفائدة في الاسلوب والانشاء واللغة والثقافة الادبية.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/صبح-الاعشى.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/صبح-الاعشى.pdf" download>تحميل</a>
+</div>
+</div>
+
+<div class="book" data-title="خزانة الادب">
+<h3>خزانة الادب</h3>
+<p>من الكتب المهمة في شرح الشواهد الشعرية والنحوية والادبية.</p>
+<div class="buttons">
+<a class="open-btn" href="pdfs/خزانة-الادب.pdf" target="_blank">فتح</a>
+<a class="download-btn" href="pdfs/خزانة-الادب.pdf" download>تحميل</a>
+</div>
+</div>
+
+</div>
+
+<footer>
+    <img src="logo.png" alt="logo">
+    <p>&copy; 2026 مدرسة خالد بن الوليد الثانوية للبين - لواء الموقر - جميع الحقوق محفوظة.</p>
+</footer>
+
+</section>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const books = document.querySelectorAll(".book");
+
+searchInput.addEventListener("input", function(){
+  let value = this.value.toLowerCase().trim();
+
+  books.forEach(book => {
+    let title = book.dataset.title.toLowerCase();
+    if(title.includes(value)){
+      book.style.display = "flex";
+    }else{
+      book.style.display = "none";
+    }
+  });
+});
+
+function updateThemeButton(){
+  const btn = document.getElementById("themeBtn");
+  if(document.body.classList.contains("dark")){
+    btn.textContent = "☀️";
+  }else{
+    btn.textContent = "🌙";
+  }
+}
+
+function applySystemTheme(){
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if(prefersDark){
+    document.body.classList.add("dark");
+  }else{
+    document.body.classList.remove("dark");
+  }
+  updateThemeButton();
+}
+
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")){
+    localStorage.setItem("theme","dark");
+  }else{
+    localStorage.setItem("theme","light");
+  }
+
+  updateThemeButton();
+}
+
+if(localStorage.getItem("theme")){
+  if(localStorage.getItem("theme")==="dark"){
+    document.body.classList.add("dark");
+  }
+}else{
+  applySystemTheme();
+}
+
+updateThemeButton();
+
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+  if(!localStorage.getItem("theme")){
+    applySystemTheme();
+  }
+});
+</script>
+
+</body>
+</html>
