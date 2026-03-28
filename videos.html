@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" href="icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الفيديوهات التعليمية - منصة الفصاحة</title>
+
+  <meta name="description" content="صفحة الفيديوهات التعليمية في منصة الفصاحة لتعلم اللغة العربية والقواعد والقراءة والمفردات.">
+  <meta name="keywords" content="فيديوهات تعليمية, منصة الفصاحة, اللغة العربية, النحو, القراءة, المفردات">
+  <meta name="author" content="مدرسة خالد بن الوليد الثانوية">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#1f6f8b">
+  <meta name="color-scheme" content="light dark">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f4f6f8;
+      --card:#e8e8e8;
+      --text:#1e293b;
+      --muted:#64748b;
+      --primary:#1f6f8b;
+      --secondary:#2ea3c6;
+      --gold:#f4b400;
+      --border:rgba(0,0,0,.08);
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --radius:16px;
+    }
+
+    *{
+      box-sizing:border-box;
+      transition:
+        background-color .4s ease,
+        color .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease,
+        transform .35s ease,
+        opacity .35s ease;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:"Cairo",sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(46,163,198,.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(244,180,0,.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.9;
+    }
+
+    .container{
+      width:100%;
+      padding:0 22px;
+    }
+
+    header{
+      padding:20px 0;
+    }
+
+    .hero{
+      width:100%;
+      min-height:270px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      background:
+        linear-gradient(rgba(0,0,0,.42), rgba(0,0,0,.66)),
+        url("img.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      padding:50px 20px;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      text-align:center;
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(31,111,139,.14), rgba(244,180,0,.10));
+      pointer-events:none;
+    }
+
+    .hero h1,
+    .hero p{
+      position:relative;
+      z-index:1;
+    }
+
+    .hero h1{
+      font-size:60px;
+      margin:0;
+      font-weight:900;
+      font-family:"Amiri",serif;
+    }
+
+    .hero p{
+      font-size:18px;
+      margin-top:12px;
+      opacity:.95;
+      max-width:780px;
+    }
+
+    .dark-toggle{
+      position:fixed;
+      top:20px;
+      left:20px;
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      border:none;
+      background:var(--primary);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 5px 15px rgba(0,0,0,.2);
+      z-index:9999;
+    }
+
+    .navwrap{
+      position:sticky;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(8px);
+      background:rgba(244,246,248,.65);
+      border-bottom:1px solid rgba(0,0,0,.05);
+    }
+
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      margin:16px 0;
+      flex-wrap:wrap;
+      padding-top:4px;
+      padding-bottom:4px;
+    }
+
+    nav a{
+      text-decoration:none;
+      padding:10px 18px;
+      border-radius:30px;
+      background:var(--card);
+      border:1px solid var(--border);
+      color:var(--text);
+      font-weight:700;
+    }
+
+    nav a:hover,
+    nav a.active{
+      background:var(--primary);
+      color:#fff;
+      transform:translateY(-2px);
+    }
+
+    section{
+      background:var(--card);
+      padding:20px;
+      margin:20px 0;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    section h2{
+      margin:0 0 15px;
+      color:var(--gold);
+    }
+
+    .badge{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      background:rgba(244,180,0,.18);
+      color:var(--gold);
+      border:1px solid rgba(244,180,0,.25);
+      border-radius:999px;
+      vertical-align:middle;
+      margin-inline-start:8px;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .toolbar{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .search-box,
+    .filter-box{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .search-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .search-row input{
+      flex:1;
+      min-width:220px;
+      padding:12px 16px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      font-family:"Cairo",sans-serif;
+      font-size:15px;
+      background:#fff;
+      color:#111827;
+      outline:none;
+    }
+
+    .search-row button,
+    .clear-btn,
+    .play-btn,
+    .open-btn{
+      padding:12px 18px;
+      border:none;
+      border-radius:12px;
+      background:var(--primary);
+      color:#fff;
+      font-family:"Cairo",sans-serif;
+      font-weight:700;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .search-row button:hover,
+    .clear-btn:hover,
+    .play-btn:hover,
+    .open-btn:hover{
+      background:var(--gold);
+      color:#000;
+      transform:translateY(-2px);
+    }
+
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .filter-btn{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      font-family:"Cairo",sans-serif;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover{
+      background:var(--primary);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:15px;
+    }
+
+    .stat-card{
+      background:#f9fafb;
+      padding:18px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+
+    .stat-card:hover,
+    .video-card:hover,
+    .playlist-card:hover,
+    .tip-card:hover,
+    .search-box:hover,
+    .filter-box:hover{
+      transform:translateY(-4px);
+    }
+
+    .stat-num{
+      display:block;
+      font-size:32px;
+      font-weight:800;
+      color:var(--primary);
+      line-height:1.2;
+    }
+
+    .stat-label{
+      display:block;
+      margin-top:8px;
+      color:var(--muted);
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .tab-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:18px;
+    }
+
+    .tab-btn{
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      color:var(--text);
+      font-family:"Cairo",sans-serif;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover{
+      background:var(--primary);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .videos-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+      gap:18px;
+    }
+
+    .video-card{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .thumb{
+      position:relative;
+      aspect-ratio:16 / 9;
+      background:linear-gradient(135deg, rgba(31,111,139,.95), rgba(46,163,198,.90));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      overflow:hidden;
+    }
+
+    .thumb::before{
+      content:"";
+      position:absolute;
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      background:rgba(255,255,255,.08);
+      top:-35px;
+      left:-35px;
+    }
+
+    .thumb::after{
+      content:"▶";
+      position:relative;
+      z-index:1;
+      width:74px;
+      height:74px;
+      background:rgba(255,255,255,.18);
+      border:2px solid rgba(255,255,255,.25);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:30px;
+      color:#fff;
+      backdrop-filter:blur(6px);
+    }
+
+    .thumb-title{
+      position:absolute;
+      bottom:12px;
+      right:14px;
+      left:14px;
+      color:#fff;
+      font-size:14px;
+      font-weight:700;
+      z-index:1;
+      text-shadow:0 2px 8px rgba(0,0,0,.35);
+    }
+
+    .video-body{
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex:1;
+    }
+
+    .video-body h3{
+      margin:0;
+      color:var(--primary);
+      font-size:20px;
+      line-height:1.6;
+    }
+
+    .video-body p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .meta-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .pill{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(31,111,139,.12);
+      color:var(--primary);
+      font-weight:700;
+    }
+
+    .video-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:auto;
+    }
+
+    .open-btn{
+      background:var(--secondary);
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .result-count{
+      color:var(--muted);
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .playlist-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:18px;
+    }
+
+    .playlist-card{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .playlist-card h3{
+      margin:0 0 8px;
+      color:var(--primary);
+    }
+
+    .playlist-card p{
+      margin:0 0 12px;
+      color:var(--muted);
+    }
+
+    .playlist-card ul{
+      margin:0;
+      padding-right:20px;
+    }
+
+    .playlist-card li{
+      margin-bottom:6px;
+    }
+
+    .tips-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:15px;
+    }
+
+    .tip-card{
+      background:#f9fafb;
+      padding:16px;
+      border-radius:14px;
+      border:1px solid var(--border);
+    }
+
+    .tip-card h3{
+      margin:0 0 8px;
+      color:var(--primary);
+      font-size:18px;
+    }
+
+    .tip-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+ 
+
+    .video-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:10000;
+    }
+
+    .video-modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      width:min(980px,100%);
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:0 20px 60px rgba(0,0,0,.28);
+      overflow:hidden;
+    }
+
+    .modal-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .modal-top h3{
+      margin:0;
+      color:var(--primary);
+      font-size:20px;
+    }
+
+    .close-btn{
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:50%;
+      background:var(--primary);
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+      font-weight:900;
+    }
+
+    .close-btn:hover{
+      background:var(--gold);
+      color:#000;
+    }
+
+    .modal-frame{
+      position:relative;
+      aspect-ratio:16 / 9;
+      background:#000;
+    }
+
+    .modal-frame iframe{
+      width:100%;
+      height:100%;
+      border:none;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .top-btn{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      width:46px;
+      height:46px;
+      border:none;
+      border-radius:50%;
+      background:var(--gold);
+      color:#000;
+      font-size:22px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(0,0,0,.18);
+      display:none;
+      z-index:9999;
+    }
+
+    .top-btn.show{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    footer{
+      text-align:center;
+      padding:15px;
+      margin-top:30px;
+      background:#1f2937;
+      border-radius:15px;
+      color:#fff;
+    }
+
+    footer img{
+      width:100px;
+      border-radius:50%;
+      border:solid 2px white;
+      transition:.2s;
+    }
+
+    footer img:hover{
+      box-shadow:0 0 10px white;
+    }
+
+    body.dark{
+      --bg:#0f172a;
+      --card:#1e293b;
+      --text:#f1f5f9;
+      --muted:#94a3b8;
+      --border:rgba(255,255,255,.08);
+    }
+
+    body.dark .navwrap{
+      background:rgba(15,23,42,.7);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    body.dark nav a{
+      background:#1e293b;
+      color:#f1f5f9;
+    }
+
+    body.dark nav a:hover,
+    body.dark nav a.active{
+      background:var(--secondary);
+      color:#fff;
+    }
+
+    body.dark section,
+    body.dark .stat-card,
+    body.dark .video-card,
+    body.dark .playlist-card,
+    body.dark .tip-card,
+    body.dark .search-box,
+    body.dark .filter-box,
+    body.dark .modal-box{
+      background:#1e293b;
+      color:#f1f5f9;
+    }
+
+    body.dark .search-row input,
+    body.dark .filter-btn,
+    body.dark .tab-btn{
+      background:#0f172a;
+      color:#f1f5f9;
+      border-color:rgba(255,255,255,.08);
+    }
+
+    body.dark .video-body p,
+    body.dark .playlist-card p,
+    body.dark .tip-card p,
+    body.dark .result-count{
+      color:#94a3b8;
+    }
+
+    body.dark .notice{
+      background:linear-gradient(135deg, rgba(46,163,198,.15), rgba(244,180,0,.12));
+    }
+
+    body.dark footer{
+      background:#0f172a;
+    }
+
+    @media (max-width:980px){
+      .toolbar{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:768px){
+      .hero h1{
+        font-size:42px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .container{
+        padding:0 14px;
+      }
+
+      .search-row{
+        flex-direction:column;
+      }
+
+      .search-row button,
+      .clear-btn{
+        width:100%;
+      }
+    }
+
+/* تحسين الازرار في الوضع الداكن */
+body.dark .filter-btn,
+body.dark .tab-btn{
+  background:#0f172a;
+  color:#f1f5f9;
+  border:1px solid rgba(255,255,255,.10);
+}
+
+body.dark .filter-btn:hover,
+body.dark .filter-btn.active,
+body.dark .tab-btn:hover,
+body.dark .tab-btn.active{
+  background:var(--secondary);
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 10px 20px rgba(46,163,198,.18);
+}
+
+body.dark .search-row button,
+body.dark .clear-btn,
+body.dark .play-btn,
+body.dark .open-btn,
+body.dark .close-btn{
+  background:var(--primary);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+body.dark .search-row button:hover,
+body.dark .clear-btn:hover,
+body.dark .play-btn:hover,
+body.dark .open-btn:hover,
+body.dark .close-btn:hover{
+  background:var(--gold);
+  color:#000;
+  border-color:transparent;
+  box-shadow:0 10px 22px rgba(244,180,0,.18);
+}
+
+/* تحسين شكل الزر الثانوي */
+body.dark .open-btn{
+  background:#164e63;
+}
+
+body.dark .open-btn:hover{
+  background:var(--gold);
+  color:#000;
+}
+
+/* تحسين مظهر زر الوضع الليلي نفسه */
+body.dark .dark-toggle{
+  background:var(--secondary);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+/* تحسين ازرار القائمة العلوية */
+body.dark nav a{
+  background:#1e293b;
+  color:#f1f5f9;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+body.dark nav a:hover,
+body.dark nav a.active{
+  background:var(--secondary);
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 10px 20px rgba(46,163,198,.18);
+}
+
+
+  </style>
+</head>
+
+<body>
+  <header class="container">
+    <div class="hero reveal">
+      <h1>الفيديوهات التعليمية</h1>
+      <p>صفحة مرئية متكاملة لتعلم اللغة العربية من خلال فيديوهات منظمة حسب المهارة والمجال مع بحث وفلترة وتشغيل مباشر داخل الصفحة.</p>
+    </div>
+  </header>
+
+  <button id="themeBtn" class="dark-toggle" onclick="toggleDarkMode()" aria-label="تبديل الوضع الليلي">🌙</button>
+
+  <div class="navwrap">
+    <nav class="container">
+      <a href="index.html">الرئيسية</a>
+      <a href="index.html#lessons">الدروس</a>
+      <a href="index.html#grammar">القواعد</a>
+      <a href="videos.html" class="active">الفيديوهات</a>
+      <a href="index.html#encyclopedia">الموسوعات</a>
+      <a href="index.html#library">المكتبة</a>
+      <a href="contact.html">تواصل معنا</a>
+      <a href="login.html">تسجيل دخول</a>
+    </nav>
+  </div>
+
+  <main class="container">
+    <section class="reveal">
+      <h2>البحث والفلترة <span class="badge">متقدم</span></h2>
+      <p class="muted">ابحث عن أي موضوع مثل الحروف أو النحو أو القراءة ثم اختر التبويب المناسب لتظهر لك الفيديوهات المرتبطة به فقط.</p>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <div class="search-row">
+            <input type="text" id="videoSearch" placeholder="ابحث عن فيديو أو مهارة أو موضوع">
+            <button onclick="applyFilters()">بحث</button>
+            <button class="clear-btn" onclick="resetFilters()">إعادة ضبط</button>
+          </div>
+        </div>
+
+        <div class="filter-box">
+          <div class="muted">فلترة سريعة حسب المستوى:</div>
+          <div class="filters">
+            <button class="filter-btn active" data-level="all" onclick="setLevelFilter('all', this)">الكل</button>
+            <button class="filter-btn" data-level="beginner" onclick="setLevelFilter('beginner', this)">مبتدئ</button>
+            <button class="filter-btn" data-level="intermediate" onclick="setLevelFilter('intermediate', this)">متوسط</button>
+            <button class="filter-btn" data-level="skills" onclick="setLevelFilter('skills', this)">مهارات</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-head">
+        <h2>مكتبة الفيديوهات <span class="badge">منظمة</span></h2>
+        <div class="result-count" id="resultCount">عدد النتائج الحالية: 8</div>
+      </div>
+
+      <div class="tab-row">
+        <button class="tab-btn active" data-category="all" onclick="setCategory('all', this)">جميع الفيديوهات</button>
+        <button class="tab-btn" data-category="letters" onclick="setCategory('letters', this)">الحروف والنطق</button>
+        <button class="tab-btn" data-category="vocabulary" onclick="setCategory('vocabulary', this)">المفردات</button>
+        <button class="tab-btn" data-category="reading" onclick="setCategory('reading', this)">القراءة</button>
+        <button class="tab-btn" data-category="grammar" onclick="setCategory('grammar', this)">القواعد</button>
+      </div>
+
+      <div class="videos-grid" id="videosGrid">
+        <div class="video-card video-item" data-category="letters" data-level="beginner" data-search="الحروف العربية النطق مخارج الحروف تمهيدي مبتدئ">
+          <div class="thumb">
+            <div class="thumb-title">مدخل إلى الحروف العربية</div>
+          </div>
+          <div class="video-body">
+            <h3>فيديو 1: الحروف العربية ونطقها</h3>
+            <p>فيديو مناسب للمبتدئين يشرح الحروف العربية وأصواتها وكيفية التمييز بين الحروف المتشابهة.</p>
+            <div class="meta-row">
+              <span class="pill">الحروف</span>
+              <span class="pill">مبتدئ</span>
+              <span class="pill">نطق</span>
+            </div>
+            <div class="video-actions">
+              <button class="play-btn" onclick="openVideo('https://www.youtube.com/embed/aqz-KE-bpKQ', 'فيديو 1: الحروف العربية ونطقها')">تشغيل داخل الصفحة</button>
+              <a class="open-btn" href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" rel="noopener">فتح في يوتيوب</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card video-item" data-category="letters" data-level="beginner" data-search="مخارج الحروف التفريق بين الحروف العربية النطق الصحيح">
+          <div class="thumb">
+            <div class="thumb-title">التمييز بين الحروف المتقاربة</div>
+          </div>
+          <div class="video-body">
+            <h3>فيديو 2: مخارج الحروف بطريقة مبسطة</h3>
+            <p>يساعد الطالب على التفريق بين الحروف القريبة مثل س وص وذ وز وت وط بطريقة سهلة.</p>
+            <div class="meta-row">
+              <span class="pill">مخارج</span>
+              <span class="pill">تمييز</span>
+              <span class="pill">مبتدئ</span>
+            </div>
+            <div class="video-actions">
+              <button class="play-btn" onclick="openVideo('https://www.youtube.com/embed/aqz-KE-bpKQ', 'فيديو 2: مخارج الحروف بطريقة مبسطة')">تشغيل داخل الصفحة</button>
+              <a class="open-btn" href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" rel="noopener">فتح في يوتيوب</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card video-item" data-category="vocabulary" data-level="beginner" data-search="المفردات كلمات اساسية يومية عربية الطلاب">
+          <div class="thumb">
+            <div class="thumb-title">مفردات مهمة للطالب</div>
+          </div>
+          <div class="video-body">
+            <h3>فيديو 3: المفردات الأساسية في العربية</h3>
+            <p>تعلم كلمات يومية مهمة واستخدامها في جمل قصيرة تساعدك على التحدث والكتابة بشكل أفضل.</p>
+            <div class="meta-row">
+              <span class="pill">مفردات</span>
+              <span class="pill">طلاب</span>
+              <span class="pill">سهل</span>
+            </div>
+            <div class="video-actions">
+              <button class="play-btn" onclick="openVideo('https://www.youtube.com/embed/aqz-KE-bpKQ', 'فيديو 3: المفردات الأساسية في العربية')">تشغيل داخل الصفحة</button>
+              <a class="open-btn" href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" rel="noopener">فتح في يوتيوب</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card video-item" data-category="vocabulary" data-level="intermediate" data-search="بناء الجملة بالكلمات استخدام المفردات في جمل قصيرة">
+          <div class="thumb">
+            <div class="thumb-title">بناء جمل من مفردات جديدة</div>
+          </div>
+          <div class="video-body">
+            <h3>فيديو 4: استخدام المفردات داخل الجمل</h3>
+            <p>فيديو يوضح كيف يحول الطالب الكلمات الجديدة إلى جمل مفيدة وواضحة في الكتابة والتعبير.</p>
+            <div class="meta-row">
+              <span class="pill">مفردات</span>
+              <span class="pill">جمل</span>
+              <span class="pill">متوسط</span>
+            </div>
+            <div class="video-actions">
+              <button class="play-btn" onclick="openVideo('https://www.youtube.com/embed/aqz-KE-bpKQ', 'فيديو 4: استخدام المفردات داخل الجمل')">تشغيل داخل الصفحة</button>
+              <a class="open-btn" href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" rel="noopener">فتح في يوتيوب</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card video-item" data-category="reading" data-level="skills" data-search="القراءة فهم النص القراءة الصحيحة التحليل مهارات">
+          <div class="thumb">
+            <div class="thumb-title">تحسين القراءة والفهم</div>
+          </div>
+          <div class="video-body">
+            <h3>فيديو 5: القراءة الصحيحة وفهم النص</h3>
+            <p>تعلم كيف تقرأ النصوص العربية بهدوء وتحدد الكلمات الصعبة ثم تستخرج الأفكار الأساسية من النص.</p>
+            <div class="meta-row">
+              <span class="pill">قراءة</span>
+              <span class="pill">فهم</span>
+              <span class="pill">مهارات</span>
+            </div>
+            <div class="video-actions">
+              <button class="play-btn" onclick="openVideo('https://www.youtube.com/embed/aqz-KE-bpKQ', 'فيديو 5: القراءة الصحيحة وفهم النص')">تشغيل داخل الصفحة</button>
+              <a class="open-btn" href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" rel="noopener">فتح في يوتيوب</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card video-item" data-category="reading" data-level="skills" data-search="تحليل النص الفكرة العامة الاسئلة بعد القراءة">
+          <div class="thumb">
+            <div class="thumb-title">كيف تفهم النص بعد قراءته</div>
+          </div>
+          <div class="video-body">
+            <h3>فيديو 6: استخراج الفكرة العامة من النص</h3>
+            <p>شرح بسيط لتحديد الفكرة العامة والأفكار الفرعية والإجابة عن الأسئلة بعد القراءة.</p>
+            <div class="meta-row">
+              <span class="pill">تحليل</span>
+              <span class="pill">نصوص</span>
+              <span class="pill">مهارات</span>
+            </div>
+            <div class="video-actions">
+              <button class="play-btn" onclick="openVideo('https://www.youtube.com/embed/aqz-KE-bpKQ', 'فيديو 6: استخراج الفكرة العامة من النص')">تشغيل داخل الصفحة</button>
+              <a class="open-btn" href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" rel="noopener">فتح في يوتيوب</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card video-item" data-category="grammar" data-level="beginner" data-search="الاسم الفعل الحرف اقسام الكلام النحو الاساسي">
+          <div class="thumb">
+            <div class="thumb-title">أقسام الكلام في العربية</div>
+          </div>
+          <div class="video-body">
+            <h3>فيديو 7: شرح الاسم والفعل والحرف</h3>
+            <p>درس بصري يوضح أقسام الكلام في اللغة العربية مع أمثلة واضحة تناسب الطلاب.</p>
+            <div class="meta-row">
+              <span class="pill">قواعد</span>
+              <span class="pill">نحو</span>
+              <span class="pill">أساسي</span>
+            </div>
+            <div class="video-actions">
+              <button class="play-btn" onclick="openVideo('https://www.youtube.com/embed/aqz-KE-bpKQ', 'فيديو 7: شرح الاسم والفعل والحرف')">تشغيل داخل الصفحة</button>
+              <a class="open-btn" href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" rel="noopener">فتح في يوتيوب</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card video-item" data-category="grammar" data-level="intermediate" data-search="الجملة الاسمية الجملة الفعلية القواعد النحو التمييز بين الجمل">
+          <div class="thumb">
+            <div class="thumb-title">تمييز أنواع الجمل</div>
+          </div>
+          <div class="video-body">
+            <h3>فيديو 8: الجملة الاسمية والجملة الفعلية</h3>
+            <p>تعرف على الفرق بين الجملة الاسمية والجملة الفعلية وكيفية تحديد كل نوع داخل النصوص.</p>
+            <div class="meta-row">
+              <span class="pill">جمل</span>
+              <span class="pill">نحو</span>
+              <span class="pill">متوسط</span>
+            </div>
+            <div class="video-actions">
+              <button class="play-btn" onclick="openVideo('https://www.youtube.com/embed/aqz-KE-bpKQ', 'فيديو 8: الجملة الاسمية والجملة الفعلية')">تشغيل داخل الصفحة</button>
+              <a class="open-btn" href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" rel="noopener">فتح في يوتيوب</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>مسارات تعليمية مقترحة <span class="badge">منظم</span></h2>
+      <div class="playlist-grid">
+        <div class="playlist-card">
+          <h3>مسار المبتدئين</h3>
+          <p>ابدأ بالحروف ثم انتقل إلى الكلمات ثم تدرب على نطق الجمل القصيرة.</p>
+          <ul>
+            <li>الحروف العربية ونطقها</li>
+            <li>مخارج الحروف</li>
+            <li>المفردات الأساسية</li>
+          </ul>
+        </div>
+
+        <div class="playlist-card">
+          <h3>مسار القواعد الأساسية</h3>
+          <p>مناسب للطلاب الذين يريدون بناء أساس جيد في النحو والتراكيب.</p>
+          <ul>
+            <li>الاسم والفعل والحرف</li>
+            <li>الجملة الاسمية والجملة الفعلية</li>
+            <li>التطبيق داخل الجمل</li>
+          </ul>
+        </div>
+
+        <div class="playlist-card">
+          <h3>مسار الفهم والمهارات</h3>
+          <p>مخصص لتطوير القراءة والفهم والتحليل والإجابة عن الأسئلة.</p>
+          <ul>
+            <li>القراءة الصحيحة</li>
+            <li>فهم النص</li>
+            <li>استخراج الفكرة العامة</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>نصائح للاستفادة من الفيديوهات <span class="badge">مفيد</span></h2>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h3>شاهد بقلم ودفتر</h3>
+          <p>دوّن الكلمات الجديدة والقواعد المهمة أثناء المشاهدة حتى ترجع إليها بسهولة.</p>
+        </div>
+        <div class="tip-card">
+          <h3>أوقف الفيديو عند الحاجة</h3>
+          <p>خذ وقتك في الفهم ولا تتردد في إيقاف الفيديو أو إعادته عند أي نقطة مهمة.</p>
+        </div>
+        <div class="tip-card">
+          <h3>طبق مباشرة</h3>
+          <p>بعد كل فيديو اكتب مثالا من عندك أو أجب عن سؤال قصير حتى تثبت المعلومة.</p>
+        </div>
+        <div class="tip-card">
+          <h3>تعلم بالتدرج</h3>
+          <p>ابدأ بالأساسيات ثم انتقل تدريجيا إلى القراءة والقواعد المتوسطة والمهارات.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="container reveal">
+    <div style="background:#1f2937; border-radius:15px; padding:15px;">
+      <img src="logo.png" alt="logo">
+      <p>&copy; 2026 مدرسة خالد بن الوليد الثانوية للبنين - لواء الموقر - جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <button id="topBtn" class="top-btn" onclick="scrollToTop()" aria-label="الرجوع الى اعلى الصفحة">↑</button>
+
+  <div class="video-modal" id="videoModal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <h3 id="modalTitle">تشغيل الفيديو</h3>
+        <button class="close-btn" onclick="closeVideo()">×</button>
+      </div>
+      <div class="modal-frame">
+        <iframe id="modalIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentCategory = "all";
+    let currentLevel = "all";
+
+    function updateThemeButton(){
+      const btn = document.getElementById("themeBtn");
+      if(!btn) return;
+      btn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    }
+
+    function applySystemTheme(){
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.toggle("dark", prefersDark);
+      updateThemeButton();
+    }
+
+    function toggleDarkMode(){
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+      updateThemeButton();
+    }
+
+    if(localStorage.getItem("theme")){
+      if(localStorage.getItem("theme") === "dark"){
+        document.body.classList.add("dark");
+      }
+    }else{
+      applySystemTheme();
+    }
+
+    updateThemeButton();
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+      if(!localStorage.getItem("theme")){
+        applySystemTheme();
+      }
+    });
+
+    function scrollToTop(){
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    const topBtn = document.getElementById("topBtn");
+
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 350){
+        topBtn.classList.add("show");
+      }else{
+        topBtn.classList.remove("show");
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    function setCategory(category, btn){
+      currentCategory = category;
+      document.querySelectorAll(".tab-btn").forEach(tab => tab.classList.remove("active"));
+      btn.classList.add("active");
+      applyFilters();
+    }
+
+    function setLevelFilter(level, btn){
+      currentLevel = level;
+      document.querySelectorAll(".filter-btn").forEach(item => item.classList.remove("active"));
+      btn.classList.add("active");
+      applyFilters();
+    }
+
+    function applyFilters(){
+      const query = document.getElementById("videoSearch").value.trim().toLowerCase();
+      const cards = document.querySelectorAll(".video-item");
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const category = card.dataset.category;
+        const level = card.dataset.level;
+        const searchableText = card.dataset.search + " " + card.innerText.toLowerCase();
+
+        const categoryMatch = currentCategory === "all" || category === currentCategory;
+        const levelMatch = currentLevel === "all" || level === currentLevel;
+        const searchMatch = query === "" || searchableText.includes(query);
+
+        if(categoryMatch && levelMatch && searchMatch){
+          card.style.display = "flex";
+          visibleCount++;
+        }else{
+          card.style.display = "none";
+        }
+      });
+
+      document.getElementById("resultCount").textContent = "عدد النتائج الحالية: " + visibleCount;
+    }
+
+    function resetFilters(){
+      currentCategory = "all";
+      currentLevel = "all";
+      document.getElementById("videoSearch").value = "";
+
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      document.querySelector('.tab-btn[data-category="all"]').classList.add("active");
+
+      document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+      document.querySelector('.filter-btn[data-level="all"]').classList.add("active");
+
+      applyFilters();
+    }
+
+    document.getElementById("videoSearch").addEventListener("keydown", function(e){
+      if(e.key === "Enter"){
+        applyFilters();
+      }
+    });
+
+    function openVideo(url, title){
+      const modal = document.getElementById("videoModal");
+      const iframe = document.getElementById("modalIframe");
+      const modalTitle = document.getElementById("modalTitle");
+
+      modalTitle.textContent = title;
+      iframe.src = url + "?autoplay=1";
+      modal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeVideo(){
+      const modal = document.getElementById("videoModal");
+      const iframe = document.getElementById("modalIframe");
+
+      iframe.src = "";
+      modal.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("videoModal").addEventListener("click", function(e){
+      if(e.target === this){
+        closeVideo();
+      }
+    });
+
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape"){
+        closeVideo();
+      }
+    });
+
+    applyFilters();
+  </script>
+</body>
+</html>
