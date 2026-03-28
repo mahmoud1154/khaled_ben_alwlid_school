@@ -819,7 +819,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
     const result = await response.json();
 
     if(result.ok){
-      showNotice("تم إرسال الرسالة بنجاح  .");
+      showNotice("تم إرسال الرسالة بنجاح .");
       this.reset();
     }else{
       showNotice("فشل الإرسال: " + result.description, true);
@@ -854,7 +854,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
         const result = await response.json();
 
         if(result.ok){
-          showNotice("تم إرسال الرسالة بنجاح إلى تيليجرام.");
+          showNotice("تم إرسال الرسالة بنجاح.");
           this.reset();
         }else{
           showNotice("فشل الإرسال: " + result.description, true);

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" href="icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أعمال الطلاب - منصة الفصاحة</title>
+
+  <meta name="description" content="معرض أعمال وإبداعات طلاب مدرسة خالد بن الوليد الثانوية في اللغة العربية - منصة الفصاحة.">
+  <meta name="author" content="مدرسة خالد بن الوليد الثانوية">
+  <meta name="theme-color" content="#1f6f8b">
+  <meta name="color-scheme" content="light dark">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f4f6f8;
+      --card:#e8e8e8;
+      --text:#1e293b;
+      --muted:#64748b;
+      --primary:#1f6f8b;
+      --secondary:#2ea3c6;
+      --gold:#f4b400;
+      --border:rgba(0,0,0,.08);
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --radius:16px;
+    }
+
+    *{ box-sizing:border-box; transition: all 0.4s ease; }
+    html{ scroll-behavior:smooth; }
+
+    body{
+      margin:0;
+      font-family:"Cairo",sans-serif;
+      background: var(--bg);
+      color:var(--text);
+      line-height:1.9;
+    }
+
+    .container{ width:100%; padding:0 22px; max-width: 1200px; margin: 0 auto; }
+    header{ padding:20px 0; }
+
+    /* هيرو خاص بصفحة الأعمال */
+    .hero{
+      width:100%; min-height:250px;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url("img.jpg"); /* استخدم نفس الصورة أو صورة أخرى مناسبة */
+      background-size:cover; background-position:center;
+      border-radius:20px; box-shadow:var(--shadow);
+      text-align:center; color:#fff; position:relative; overflow:hidden;
+      padding: 40px 20px;
+    }
+
+    .hero h1{ font-size: clamp(35px, 8vw, 60px); margin:0; font-weight:900; font-family:Amiri, serif; }
+    .hero p{ font-size: clamp(16px, 4vw, 20px); margin-top:12px; opacity:0.95; font-family: Cairo, sans-serif;}
+
+    .dark-toggle{
+      position:fixed; top:20px; left:20px; width:45px; height:45px;
+      border-radius:50%; border:none; background:var(--primary); color:#fff;
+      font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 5px 15px rgba(0,0,0,0.2); z-index:9999;
+    }
+
+    /* تنسيقات القائمة المستجيبة (اليمين) */
+    .menu-btn {
+      display: none; background: var(--primary); color: white; border: none;
+      padding: 10px 18px; border-radius: 10px; font-family: "Cairo", sans-serif;
+      font-weight: bold; cursor: pointer; margin: 10px 0;
+    }
+
+    .navwrap{
+      position:sticky; top:0; z-index:999;
+      backdrop-filter:blur(8px); background:rgba(244,246,248,0.65);
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+
+    nav{ display:flex; justify-content:center; gap:15px; margin:16px 0; flex-wrap:wrap; padding:4px 0; }
+    nav a{
+      text-decoration:none; padding:10px 18px; border-radius:30px;
+      background:var(--card); border:1px solid var(--border); color:var(--text);
+      font-weight:700; transition:.3s; font-size: 14px;
+    }
+    nav a:hover{ background:var(--primary); color:#fff; transform:translateY(-2px); }
+
+    section{ background:var(--card); padding:25px; margin:20px 0; border-radius:var(--radius); border:1px solid var(--border); box-shadow:var(--shadow); }
+    section h2{ margin:0 0 20px; color:var(--gold); font-family: Amiri, serif; font-size: 32px; border-bottom: 2px solid var(--border); padding-bottom: 10px;}
+
+    /* تنسيقات كروت الأعمال */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .work-card {
+      background: #f9fafb;
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .work-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--primary); }
+
+    .work-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .work-title { font-size: 18px; color: var(--primary); font-weight: 700; margin: 0; }
+    .student-name { font-size: 14px; color: var(--gold); font-weight: 600; background: rgba(244,180,0,0.1); padding: 4px 10px; border-radius: 20px; }
+    
+    .work-body { font-size: 15px; color: var(--text); color: #4b5563; }
+    .work-body p { margin: 0 0 10px 0; }
+
+    .work-footer { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .work-date { font-size: 13px; color: var(--muted); }
+    .view-btn { 
+      text-decoration: none; background: var(--primary); color: white; 
+      padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; 
+    }
+    .view-btn:hover { background: var(--secondary); }
+
+    /* الميديا كويري للجوال - اليمين */
+    @media (max-width: 768px){
+      .navwrap .container { text-align: right !important; display: flex; flex-direction: column; align-items: flex-start; }
+      .menu-btn { display: block; margin-right: 5px; }
+      nav { display: none; flex-direction: column; width: 100%; gap: 8px; padding: 10px 0; }
+      nav.show { display: flex; }
+      nav a { width: 100%; text-align: right; border-radius: 8px; }
+      .hero h1{ font-size: 38px; }
+    }
+
+    /* الوضع الليلي الأصلي */
+    body.dark{ --bg:#0f172a; --card:#1e293b; --text:#f1f5f9; --muted:#94a3b8; --border:rgba(255,255,255,.08); }
+    body.dark .navwrap{ background:rgba(15,23,42,0.85); }
+    body.dark .work-card { background: #111827; }
+    body.dark .work-body { color: #d1d5db; }
+
+    footer{ text-align:center; padding:15px; margin-top:30px; background:#1f2937; border-radius:15px; color:#fff; }
+    footer img { width:80px; border-radius:50%; border:solid 2px white; margin-bottom: 10px;}
+    
+    .reveal{ opacity:0; transform:translateY(24px); transition: 0.6s ease; }
+    .reveal.visible{ opacity:1; transform:translateY(0); }
+  </style>
+</head>
+
+<body>
+  <button id="themeBtn" class="dark-toggle" onclick="toggleDarkMode()" aria-label="تبديل الوضع الليلي">🌙</button>
+
+  <header class="container">
+    <div class="hero reveal">
+      <h1>إبداعات طلابنا</h1>
+      <p>معرض لأجمل الأعمال، القصص، القصائد، والبحوث اللغوية بأقلام طلاب مدرسة خالد بن الوليد.</p>
+    </div>
+  </header>
+
+  <div class="navwrap">
+    <div class="container">
+      <button class="menu-btn" onclick="toggleMenu()">القائمة ☰</button>
+      <nav id="mainNav">
+        <a href="index.html">الرئيسية</a> <a href="index.html#lessons">الدروس</a>
+        <a href="videos.html">الفيديوهات</a>
+        <a href="index.html#grammar">القواعد</a>
+        <a href="#poetry">قصائد وأشعار</a> <a href="#stories">قصص قصيرة</a>
+        <a href="#research">بحوث لغوية</a>
+        <a href="index.html#about">من نحن</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container">
+    
+    <section id="stories" class="reveal">
+      <h2>قصص قصيرة طلابنا</h2>
+      <div class="works-grid">
+        
+        <div class="work-card">
+          <div class="work-header">
+            <h3 class="work-title">رحلة الى القمر </h3>
+            <span class="student-name">احمد اعدل البريم</span>
+          </div>
+          <div class="work-body">
+            <p>في ليلة ٍ هادئة ٍ من ليالي الصيف، كان الطفل نوح يجلس على سطح منزله الصغير، ينظر إلى ....</p>
+          </div>
+          <div class="work-footer">
+            <span class="work-date">1 مايو 2026</span>
+            <a href="شغل الطلاب/رحلة إلى القمر...احمد عادل البريم.pdf" class="view-btn">قراءة القصة</a>
+          </div>
+        </div>
+
+        <div class="work-card">
+          <div class="work-header">
+            <h3 class="work-title">لغتي العربية تاج اللغات</h3>
+            <span class="student-name">زايد النعانعة</span>
+          </div>
+          <div class="work-body">
+            <p>في إحدى حصص اللغة العربية وقف معلمي أمامنا وسأل سؤالاً غريباً: لماذا نسمي اللغة العربية لغة الضاد يا معلمي؟ ...</p>
+          </div>
+          <div class="work-footer">
+            <span class="work-date">5 مايو 2026</span>
+            <a href="شغل الطلاب/زايد النعانعة.pdf" class="view-btn">قراءة القصة</a>
+          </div>
+        </div>
+
+        <div class="work-card">
+          <div class="work-header">
+            <h3 class="work-title">سر الحديقة</h3>
+            <span class="student-name">محمد النوباني</span>
+          </div>
+          <div class="work-body">
+            <p>تلقى محمود اتصالا من احد أصدقائه يخبره بأنه شيأ غريبا يشبه الجثه ...</p>
+          </div>
+          <div class="work-footer">
+            <span class="work-date">12 مايو 2026</span>
+            <a href="شغل الطلاب/سر الحديقه.....محمد النوباني.pdf" class="view-btn">قراءة القصة</a>
+          </div>
+        </div>
+
+        <div class="work-card">
+          <div class="work-header">
+            <h3 class="work-title">غابة القواعد </h3>
+            <span class="student-name">زيد إبراهيم</span>
+          </div>
+          <div class="work-body">
+            <p>في صباح ذات يوم من أيام الربيع الجميلة ، حيث السماء زرقاء صافية، والشمس ضاحكة ناثرة ...</p>
+          </div>
+          <div class="work-footer">
+            <span class="work-date">18 مايو 2026</span>
+            <a href="شغل الطلاب/غابة القواعد.pdf" class="view-btn">قراءة القصة</a>
+          </div>
+        </div>
+
+        <div class="work-card">
+          <div class="work-header">
+            <h3 class="work-title">لغة الضاد...هوية ناطقة ووعاء للحضارة </h3>
+            <span class="student-name">إبراهيم أبوهليل</span>
+          </div>
+          <div class="work-body">
+            <p>رأى في منامه أن الحروف العربية تتراقص في السماء، وتشكل جسراً من النور يعبر به الناس نحو العلم والمعرفة...</p>
+          </div>
+          <div class="work-footer">
+            <span class="work-date">22 مايو 2026</span>
+            <a href="شغل الطلاب/لغه الضاد...إبراهيم أبو هليل.pdf" class="view-btn">قراءة القصة</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="poetry" class="reveal">
+      <h2>ركن الشعر والقصيد</h2>
+      <div class="works-grid">
+        <div class="work-card" style="border-right: 4px solid var(--gold);">
+          <div class="work-header">
+            <h3 class="work-title">لغتي فخري</h3>
+            <span class="student-name">مؤيد العابد</span>
+          </div>
+          <div class="work-body" style="text-align: center; font-family: 'Amiri', serif; font-size: 18px;">
+            <p>لُغَتِي العَرَبِيَّةُ فَخْرُ الحَضَارَاتِ، ... فِيهَا مَعَانٍ وَحِكَمُ العِبَارَاتِ</p>
+            <p>لُغَتِي العَرَبِيَّةُ هِيَ لُغَةُ الضَّادِ، ... فِي حَرْفِهَا سِحْرٌ وَمَجْدٌ لِلْبِلَادِ</p>
+            <p>فِي حُرُوفِهَا سِرُّ السَّدَادِ، ... وَبِهَا نَبْلُغُ كُلَّ المُرَادِ</p>
+          </div>
+          <div class="work-footer">
+            <span class="work-date">25 مايو 2026</span>
+            <a href="شغل الطلاب/شغر_لغتي فخري_مؤايد.pdf" class="view-btn">قراءة كاملة</a>
+          </div>
+        </div>
+
+<div class="work-card" style="border-right: 4px solid var(--gold);">
+          <div class="work-header">
+            <h3 class="work-title">لغتي هوتني</h3>
+            <span class="student-name">محمود بلال </span>
+          </div>
+          <div class="work-body" style="text-align: center; font-family: 'Amiri', serif; font-size: 18px;">
+            <p>لُغَتِي العَرَبِيَّةُ فَخْرِي وَاعْتِزَازِي ... وَبِهَا يَسْمُو العِلْمُ فِي كُلِّ المَجَالِ</p>
+            <p>لُغَةُ الضَّادِ يَا أَجْمَلَ اللُّغَاتِ ... فِيكِ الفَصَاحَةُ وَسِحْرُ العِبَارَاتِ</p>
+            <p>بِكِ نَقْرَأُ التَّارِيخَ وَالأَدَبَ العَرِيقْ ... وَنَكْتُبُ العِلْمَ بِفَخْرٍ وَبِتَوْفِيقْ</p>
+          </div>
+          <div class="work-footer">
+            <span class="work-date">25 مايو 2026</span>
+            <a href="شغل الطلاب/لغتي العربية هويتي.pdf" class="view-btn">قراءة كاملة</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // دالة القائمة المستجيبة للهاتف (تفتح لليمين)
+    function toggleMenu() {
+      const nav = document.getElementById("mainNav");
+      nav.classList.toggle("show");
+    }
+
+    // إغلاق القائمة عند الضغط على رابط (للهاتف)
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById("mainNav").classList.remove("show");
+      });
+    });
+
+function updateThemeButton(){
+      const btn = document.getElementById("themeBtn");
+      if(!btn) return;
+
+      if(document.body.classList.contains("dark")){
+        btn.textContent = "☀️";
+      }else{
+        btn.textContent = "🌙";
+      }
+    }
+
+    function applySystemTheme(){
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if(prefersDark){
+        document.body.classList.add("dark");
+      }else{
+        document.body.classList.remove("dark");
+      }
+
+      updateThemeButton();
+    }
+
+    function toggleDarkMode(){
+      document.body.classList.toggle("dark");
+
+      if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+      }else{
+        localStorage.setItem("theme","light");
+      }
+
+      updateThemeButton();
+    }
+
+    if(localStorage.getItem("theme")){
+      if(localStorage.getItem("theme")==="dark"){
+        document.body.classList.add("dark");
+      }
+    }else{
+      applySystemTheme();
+    }
+
+    updateThemeButton();
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+      if(!localStorage.getItem("theme")){
+        applySystemTheme();
+      }
+    });
+
+
+    // تأثير الظهور التدريجي الأصلي
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

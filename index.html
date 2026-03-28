@@ -757,6 +757,53 @@
         width:100%;
       }
     }
+
+/* زر القائمة للهاتف - بوضعية اليمين */
+.menu-btn {
+  display: none; 
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-family: "Cairo", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 0; /* تم إزالة auto ليبقى في اليمين */
+}
+
+@media (max-width: 768px) {
+  /* لضمان محاذاة كل شيء داخل الـ navwrap لليمين */
+  .navwrap .container {
+    text-align: right !important; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* محاذاة العناصر لليمين (بداية الـ flex) */
+  }
+
+  .menu-btn { 
+    display: block; 
+    margin-right: 5px; /* مسافة بسيطة عن الحافة اليمنى */
+  }
+
+  nav { 
+    display: none; 
+    width: 100%; 
+    gap: 5px; 
+    padding: 10px 0;
+  }
+
+  nav.show { 
+    display: flex; 
+  }
+
+  nav a { 
+    width: 100%; 
+    text-align: right; /* النصوص داخل الروابط لليمين أيضاً */
+    border-radius: 8px;
+  }
+}
+
   </style>
 </head>
 
@@ -770,19 +817,25 @@
 
   <button id="themeBtn" class="dark-toggle" onclick="toggleDarkMode()" aria-label="تبديل الوضع الليلي">🌙</button>
 
-  <div class="navwrap">
-    <nav class="container">
+<div class="navwrap">
+  <div class="container" style="text-align: center;">
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    
+    <nav id="mainNav">
       <a href="#lessons">الدروس</a>
+      <a href="videos.html">الفيديوهات</a>
       <a href="#grammar">القواعد</a>
       <a href="#quote">ومضة لغوية</a>
       <a href="#encyclopedia">الموسوعات</a>
       <a href="#library">المكتبة</a>
+      <a href="اعمال الطلاب.html">اعمال طلابنا</a>
       <a href="#faq">الاسئلة الشائعة</a>
       <a href="#about">من نحن</a>
       <a href="login.html">تسجيل دخول</a>
       <a href="contact.html">تواصل معنا</a>
     </nav>
   </div>
+</div>
 
   <section class="container quick-tools reveal">
     <div class="search-box">
@@ -1428,7 +1481,17 @@
 
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
+function toggleMenu() {
+  const nav = document.getElementById("mainNav");
+  nav.classList.toggle("show");
+}
 
+// كود إضافي لإغلاق القائمة تلقائياً بعد اختيار قسم (اختياري)
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById("mainNav").classList.remove("show");
+  });
+});
   </script>
 </body>
 </html>
